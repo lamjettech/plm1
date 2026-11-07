@@ -35,6 +35,10 @@
             50% { opacity: 0.5; }
         }
         .animate-pulse-slow { animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white pb-28">
@@ -91,10 +95,10 @@
     <!-- MARQUEE / HEADER ANNOUNCEMENT BANNER -->
     <div class="bg-gradient-to-r from-red-950 via-red-900 to-slate-950 border-b border-red-900/50 py-3 shadow-inner overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-center sm:justify-start space-x-3 text-center sm:text-left">
-            <span class="bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-1 rounded tracking-wider animate-pulse shrink-0">HOT HITS</span>
+            <span class="bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-1 rounded tracking-wider animate-pulse shrink-0">NEW ALBUMS</span>
             <div class="overflow-hidden whitespace-nowrap">
                 <p class="text-xs sm:text-sm font-medium text-red-100 tracking-wide inline-block animate-[marquee_20s_linear_infinite]">
-                    🔥 Download Latest Afrobeats, Amapiano & Gospel Bangers by Phillip Lisomona — Stream & Download Free Today! 🎵
+                    🔥 Stream & Download New Albums and Hits by Phillip Lisomona — Free Gospel & Inspirational Music Today! 🎵
                 </p>
             </div>
         </div>
@@ -110,10 +114,10 @@
                 <!-- Category Filter Pills Bar -->
                 <div class="flex items-center justify-between flex-wrap gap-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800 shadow-md">
                     <div class="flex items-center space-x-2 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto">
-                        <button onclick="filterCategory('All')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg shadow-red-600/30" data-cat="All">All Hits</button>
+                        <button onclick="filterCategory('All')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg shadow-red-600/30" data-cat="All">All Tracks</button>
                         <button onclick="filterCategory('Audio')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Audio">Audio</button>
                         <button onclick="filterCategory('Gospel')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Gospel">Gospel</button>
-                        <button onclick="filterCategory('Video')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Video">Video</button>
+                        <button onclick="filterCategory('Album')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Album">New Albums</button>
                     </div>
                     <span id="resultCount" class="text-xs text-slate-400 font-medium hidden sm:inline">Showing all tracks</span>
                 </div>
@@ -134,18 +138,18 @@
                         <span>Search Music</span>
                     </h3>
                     <div class="relative">
-                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Type here to search track or producer..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500 transition-colors">
+                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Type here to search track..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500 transition-colors">
                         <button onclick="clearSearch()" class="absolute right-3 top-3.5 text-slate-400 hover:text-white text-xs">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Songs You May Have Missed Widget -->
+                <!-- New Albums Showcase Widget -->
                 <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-red-500 mb-4 flex items-center space-x-2 pb-2 border-b border-slate-800">
-                        <i class="fa-solid fa-fire"></i>
-                        <span>Songs You May Have Missed</span>
+                        <i class="fa-solid fa-compact-disc"></i>
+                        <span>New Albums Releases</span>
                     </h3>
                     <div id="missedSongsList" class="space-y-4">
                         <!-- Populated by JS -->
@@ -158,10 +162,10 @@
                         <img src="https://placehold.co/200x200/1e293b/ef4444?text=PL" alt="Phillip Lisomona" class="w-full h-full object-cover rounded-full">
                     </div>
                     <h4 class="font-bold text-base text-white">Phillip Lisomona</h4>
-                    <p class="text-xs text-red-400 font-medium mb-3">Top Producer & Artist</p>
-                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">Bringing you the finest African rhythms, Amapiano, and uplifting Gospel melodies straight from the studio.</p>
+                    <p class="text-xs text-red-400 font-medium mb-3">Gospel Artist & Producer</p>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">Spreading the message of hope, faith, and inspiration through powerful gospel melodies and new album releases.</p>
                     <button onclick="openContactModal()" class="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold uppercase transition-colors shadow-lg shadow-red-600/30">
-                        Book / Contact Producer
+                        Book / Contact Artist
                     </button>
                 </div>
             </aside>
@@ -216,7 +220,7 @@
                     <i class="fa-solid fa-envelope"></i>
                 </div>
                 <h3 class="text-lg font-bold text-white">Contact Phillip Lisomona</h3>
-                <p class="text-xs text-slate-400">For bookings, beat leasing, and artist collaborations.</p>
+                <p class="text-xs text-slate-400">For bookings, events, and ministry inquiries.</p>
             </div>
             <form onsubmit="handleContactSubmit(event)" class="space-y-4">
                 <div>
@@ -238,7 +242,7 @@
         </div>
     </div>
 
-    <!-- DOWNLOAD MODAL / POPUP MESSAGE -->
+    <!-- DOWNLOAD MODAL / TOAST -->
     <div id="toast" class="fixed bottom-24 right-4 z-50 bg-slate-900 border border-red-600/50 text-white px-5 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3">
         <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white text-xs">
             <i class="fa-solid fa-download"></i>
@@ -252,133 +256,164 @@
     <!-- FOOTER -->
     <footer class="bg-black border-t border-slate-900 py-8 text-center text-xs text-slate-500 mt-auto">
         <div class="max-w-7xl mx-auto px-4 space-y-4">
-            <p class="font-semibold text-slate-400">© 2026 Phillip Lisomona Music Distribution. All Rights Reserved.</p>
+            <p class="font-semibold text-slate-400">© 2026 Phillip Lisomona Music. All Rights Reserved.</p>
             <div class="flex justify-center space-x-6 text-slate-400 text-sm">
                 <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-facebook"></i></a>
                 <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
                 <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
             </div>
-            <p class="text-[10px] text-slate-600">Designed with CituMuzik Portal layout standards for African Hitmakers.</p>
+            <p class="text-[10px] text-slate-600">Designed with CituMuzik Portal layout standards for Phillip Lisomona.</p>
         </div>
     </footer>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Track Database
+        // Track Database updated with exact titles from files
         const tracks = [
             {
                 id: 1,
-                title: "Phillip Lisomona Ft Rayvanny – Amapiano Vibe",
-                artist: "Phillip Lisomona Ft Rayvanny",
+                title: "Phillip-Lisomona-Adam",
+                artist: "Phillip Lisomona",
                 category: "Audio",
                 typeTag: "NEW AUDIO",
                 typeColor: "bg-red-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Amapiano+Vibe",
-                downloads: "42.5k",
+                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Adam",
+                downloads: "24.5k",
                 duration: "3:45",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                lyrics: "Verse 1: Yeah, Phillip Lisomona on the beat...\nMoving through the rhythm, Amapiano heat...\nChorus: Dance to the groove, feel the bassline drop..."
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
             },
             {
                 id: 2,
-                title: "Phillip Lisomona – Grace & Glory (Gospel)",
+                title: "Phillip-Lisomona-Atunyamuke",
                 artist: "Phillip Lisomona",
                 category: "Gospel",
                 typeTag: "NEW GOSPEL",
                 typeColor: "bg-amber-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Grace+and+Glory",
+                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Atunyamuke",
                 downloads: "19.2k",
                 duration: "4:12",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                lyrics: "Intro: Hallelujah...\nVerse: Count your blessings every single day...\nLord you guide me when I lose my way..."
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
             },
             {
                 id: 3,
-                title: "Phillip Lisomona Ft Harmonize – Nakubabu Remix (Official Video)",
-                artist: "Phillip Lisomona Ft Harmonize",
-                category: "Video",
-                typeTag: "NEW VIDEO",
-                typeColor: "bg-blue-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/3b82f6?text=Nakubabu+Video",
-                downloads: "88.1k",
-                duration: "3:20",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-                lyrics: "Visuals playing on screen...\nNakubabu yangu weee..."
+                title: "Phillip-Lisomona-Bulumbu",
+                artist: "Phillip Lisomona",
+                category: "Audio",
+                typeTag: "NEW AUDIO",
+                typeColor: "bg-red-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Bulumbu",
+                downloads: "18.1k",
+                duration: "3:30",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
             },
             {
                 id: 4,
-                title: "Phillip Lisomona – Lusaka to Jozi (Afrobeat)",
+                title: "Phillip-Lisomona-Ico-nyimbila",
                 artist: "Phillip Lisomona",
-                category: "Audio",
-                typeTag: "HOT AUDIO",
-                typeColor: "bg-red-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Lusaka+to+Jozi",
-                downloads: "31.4k",
-                duration: "3:15",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-                lyrics: "From Lusaka city down to Johannesburg...\nWe making waves across the continent..."
+                category: "Gospel",
+                typeTag: "NEW ALBUM",
+                typeColor: "bg-purple-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/a855f7?text=Ico+Nyimbila",
+                downloads: "32.4k",
+                duration: "4:05",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
             },
             {
                 id: 5,
-                title: "Phillip Lisomona Ft Pompi – Nyimbo Yangu (Gospel)",
-                artist: "Phillip Lisomona Ft Pompi",
-                category: "Gospel",
-                typeTag: "NEW GOSPEL",
-                typeColor: "bg-amber-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Nyimbo+Yangu",
-                downloads: "24.8k",
-                duration: "4:50",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-                lyrics: "Huu ni wimbo wangu wa sifa...\nKumtukuza Bwana wa mabwana..."
+                title: "Phillip-Lisomona-Libizo",
+                artist: "Phillip Lisomona",
+                category: "Audio",
+                typeTag: "NEW AUDIO",
+                typeColor: "bg-red-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Libizo",
+                downloads: "21.8k",
+                duration: "3:50",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
             },
             {
                 id: 6,
-                title: "Phillip Lisomona – Studio Sessions Documentary (Video)",
+                title: "Phillip-Lisomona-Takuli-Kubota",
                 artist: "Phillip Lisomona",
-                category: "Video",
-                typeTag: "NEW VIDEO",
-                typeColor: "bg-blue-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/3b82f6?text=Studio+Docu",
-                downloads: "15.0k",
-                duration: "5:02",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
-                lyrics: "[Instrumental Documentary Video]"
+                category: "Album",
+                typeTag: "NEW ALBUM",
+                typeColor: "bg-purple-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/a855f7?text=Takuli+Kubota",
+                downloads: "28.3k",
+                duration: "4:20",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+            },
+            {
+                id: 7,
+                title: "Phillip-Lisomona-Tuli-fimuti",
+                artist: "Phillip Lisomona",
+                category: "Gospel",
+                typeTag: "NEW GOSPEL",
+                typeColor: "bg-amber-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Tuli+Fimuti",
+                downloads: "15.9k",
+                duration: "3:40",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
+            },
+            {
+                id: 8,
+                title: "Phillip-Lisomona-Tutamutami",
+                artist: "Phillip Lisomona",
+                category: "Audio",
+                typeTag: "NEW AUDIO",
+                typeColor: "bg-red-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Tutamutami",
+                downloads: "22.1k",
+                duration: "3:55",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+            },
+            {
+                id: 9,
+                title: "Phillip-Lisomona-Tuyoomubona",
+                artist: "Phillip Lisomona",
+                category: "Album",
+                typeTag: "NEW ALBUM",
+                typeColor: "bg-purple-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/a855f7?text=Tuyoomubona",
+                downloads: "35.0k",
+                duration: "4:15",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
+            },
+            {
+                id: 10,
+                title: "Phillip-Lisomona-ft-Nachambwa",
+                artist: "Phillip Lisomona ft Nachambwa",
+                category: "Audio",
+                typeTag: "FEATURED",
+                typeColor: "bg-emerald-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/10b981?text=Ft+Nachambwa",
+                downloads: "41.2k",
+                duration: "3:48",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
             }
         ];
 
         const missedSongs = [
             {
                 id: 101,
-                title: "Phillip Lisomona – Gonkoto Pamwe",
+                title: "Phillip-Lisomona-Ico-nyimbila",
                 artist: "Phillip Lisomona",
-                thumb: "https://placehold.co/100x100/1e293b/ef4444?text=Gonkoto",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
-                typeTag: "AUDIO"
+                thumb: "https://placehold.co/100x100/1e293b/a855f7?text=Album+1",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
             },
             {
                 id: 102,
-                title: "Phillip Lisomona Ft Yo Maps – Sukuma Mkami",
-                artist: "Phillip Lisomona Ft Yo Maps",
-                thumb: "https://placehold.co/100x100/1e293b/f59e0b?text=Sukuma",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-                typeTag: "AUDIO"
+                title: "Phillip-Lisomona-Takuli-Kubota",
+                artist: "Phillip Lisomona",
+                thumb: "https://placehold.co/100x100/1e293b/a855f7?text=Album+2",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
             },
             {
                 id: 103,
-                title: "Phillip Lisomona – Nakuabudu (Acoustic)",
+                title: "Phillip-Lisomona-Tuyoomubona",
                 artist: "Phillip Lisomona",
-                thumb: "https://placehold.co/100x100/1e293b/3b82f6?text=Acoustic",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
-                typeTag: "GOSPEL"
-            },
-            {
-                id: 104,
-                title: "Phillip Lisomona – Urukundo Live Performance",
-                artist: "Phillip Lisomona",
-                thumb: "https://placehold.co/100x100/1e293b/10b981?text=Live",
-                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
-                typeTag: "VIDEO"
+                thumb: "https://placehold.co/100x100/1e293b/a855f7?text=Album+3",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
             }
         ];
 
@@ -387,7 +422,6 @@
         let isPlaying = false;
         const audioElement = new Audio();
 
-        // Initialize App on Load
         window.onload = function() {
             renderTracks(tracks);
             renderMissedSongs();
@@ -405,7 +439,7 @@
                 return;
             }
 
-            grid.innerHTML = list.map((track, idx) => `
+            grid.innerHTML = list.map((track) => `
                 <div class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all group flex flex-col justify-between">
                     <div>
                         <div class="relative overflow-hidden aspect-video bg-slate-950">
@@ -458,7 +492,6 @@
         }
 
         function filterCategory(cat) {
-            // Update active pill button style
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 if (btn.getAttribute('data-cat') === cat) {
                     btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg shadow-red-600/30";
