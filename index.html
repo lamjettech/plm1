@@ -30,11 +30,6 @@
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .animate-pulse-slow { animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         @keyframes marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
@@ -43,12 +38,10 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white pb-28">
 
-    <!-- TOP NAVIGATION BAR (CituMuzik Style) -->
+    <!-- TOP NAVIGATION BAR -->
     <header class="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-slate-800 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                
-                <!-- Logo -->
                 <a href="#" class="flex items-center space-x-3 group">
                     <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
                         <i class="fa-solid fa-headphones text-white text-xl"></i>
@@ -59,17 +52,12 @@
                     </div>
                 </a>
 
-                <!-- Desktop Navigation Links -->
                 <nav class="hidden lg:flex items-center space-x-8 font-semibold text-sm tracking-wide">
                     <a href="#home" onclick="filterCategory('All')" class="text-red-500 hover:text-red-400 transition-colors nav-link active" data-cat="All">HOME</a>
-                    <a href="#audio" onclick="filterCategory('Audio')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Audio">AUDIO</a>
-                    <a href="#gospel" onclick="filterCategory('Gospel')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Gospel">GOSPEL</a>
-                    <a href="#video" onclick="filterCategory('Video')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Video">VIDEO</a>
-                    <a href="#lyrics" onclick="filterCategory('Lyrics')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Lyrics">LYRICS</a>
+                    <a href="#albums" onclick="filterCategory('Album')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Album">ALBUMS (v1-v7)</a>
                     <a href="#contact" onclick="openContactModal()" class="text-slate-300 hover:text-red-400 transition-colors">CONTACT</a>
                 </nav>
 
-                <!-- Search Icon / Mobile Menu Toggle -->
                 <div class="flex items-center space-x-4">
                     <button onclick="focusSearch()" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -81,89 +69,85 @@
             </div>
         </div>
 
-        <!-- Mobile Nav Drawer -->
         <div id="mobileMenu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
             <a href="#home" onclick="filterCategory('All'); toggleMobileMenu();" class="block text-red-500 font-semibold py-1">HOME</a>
-            <a href="#audio" onclick="filterCategory('Audio'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">AUDIO</a>
-            <a href="#gospel" onclick="filterCategory('Gospel'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">GOSPEL</a>
-            <a href="#video" onclick="filterCategory('Video'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">VIDEO</a>
-            <a href="#lyrics" onclick="filterCategory('Lyrics'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">LYRICS</a>
+            <a href="#albums" onclick="filterCategory('Album'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">ALBUMS (v1-v7)</a>
             <a href="#contact" onclick="openContactModal(); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">CONTACT</a>
         </div>
     </header>
 
-    <!-- MARQUEE / HEADER ANNOUNCEMENT BANNER -->
+    <!-- MARQUEE BANNER -->
     <div class="bg-gradient-to-r from-red-950 via-red-900 to-slate-950 border-b border-red-900/50 py-3 shadow-inner overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-center sm:justify-start space-x-3 text-center sm:text-left">
-            <span class="bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-1 rounded tracking-wider animate-pulse shrink-0">NEW ALBUMS</span>
+            <span class="bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-1 rounded tracking-wider animate-pulse shrink-0">NEW ALBUMS V1 - V7</span>
             <div class="overflow-hidden whitespace-nowrap">
                 <p class="text-xs sm:text-sm font-medium text-red-100 tracking-wide inline-block animate-[marquee_20s_linear_infinite]">
-                    🔥 Stream & Download New Albums and Hits by Phillip Lisomona — Gospel & Inspirational Music Today! 🎵
+                    🔥 Stream Volumes v1 to v7 with toggle play/pause streaming. Click Album Artwork to reveal tracklists! 🎵
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT LAYOUT (Dual Column like CituMuzik) -->
+    <!-- MAIN CONTENT LAYOUT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- LEFT 2 COLUMNS: Main Song Grid -->
+            <!-- LEFT 2 COLUMNS: Albums & Tracks Container -->
             <div class="lg:col-span-2 space-y-6">
                 
                 <!-- Category Filter Pills Bar -->
                 <div class="flex items-center justify-between flex-wrap gap-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800 shadow-md">
                     <div class="flex items-center space-x-2 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto">
-                        <button onclick="filterCategory('All')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg shadow-red-600/30" data-cat="All">All Tracks</button>
-                        <button onclick="filterCategory('Audio')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Audio">Audio</button>
-                        <button onclick="filterCategory('Gospel')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Gospel">Gospel</button>
-                        <button onclick="filterCategory('Album')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Album">New Albums</button>
+                        <button onclick="filterCategory('All')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg shadow-red-600/30" data-cat="All">All Albums</button>
+                        <button onclick="filterCategory('Album')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Album">Volumes (v1-v7)</button>
                     </div>
-                    <span id="resultCount" class="text-xs text-slate-400 font-medium hidden sm:inline">Showing all tracks</span>
+                    <span id="resultCount" class="text-xs text-slate-400 font-medium hidden sm:inline">Showing albums</span>
                 </div>
 
-                <!-- Song Cards Container -->
+                <!-- Albums & Song Grid Container -->
                 <div id="songGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Dynamic populated by JS -->
                 </div>
             </div>
 
-            <!-- RIGHT 1 COLUMN: Sidebar (Live Search & Missed Songs) -->
+            <!-- RIGHT 1 COLUMN: Sidebar -->
             <aside class="space-y-6">
-                
-                <!-- Live Search Box Widget -->
                 <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-red-500 mb-3 flex items-center space-x-2">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <span>Search Music</span>
                     </h3>
                     <div class="relative">
-                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Type here to search track..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500 transition-colors">
+                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Type here to search track or album..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500 transition-colors">
                         <button onclick="clearSearch()" class="absolute right-3 top-3.5 text-slate-400 hover:text-white text-xs">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- New Albums Showcase Widget -->
                 <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-red-500 mb-4 flex items-center space-x-2 pb-2 border-b border-slate-800">
                         <i class="fa-solid fa-compact-disc"></i>
-                        <span>New Albums Releases</span>
+                        <span>Albums Quick Select</span>
                     </h3>
-                    <div id="missedSongsList" class="space-y-4">
-                        <!-- Populated by JS -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="scrollToAlbum('v1')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white text-xs font-bold transition-colors text-center">Volume v1</button>
+                        <button onclick="scrollToAlbum('v2')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white text-xs font-bold transition-colors text-center">Volume v2</button>
+                        <button onclick="scrollToAlbum('v3')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white text-xs font-bold transition-colors text-center">Volume v3</button>
+                        <button onclick="scrollToAlbum('v4')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white text-xs font-bold transition-colors text-center">Volume v4</button>
+                        <button onclick="scrollToAlbum('v5')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white text-xs font-bold transition-colors text-center">Volume v5</button>
+                        <button onclick="scrollToAlbum('v6')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white text-xs font-bold transition-colors text-center">Volume v6</button>
+                        <button onclick="scrollToAlbum('v7')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white text-xs font-bold transition-colors col-span-2 text-center">Volume v7</button>
                     </div>
                 </div>
 
-                <!-- Artist Profile Quick Card -->
                 <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-red-950 rounded-2xl border border-slate-800 p-5 shadow-xl text-center">
                     <div class="w-20 h-20 mx-auto rounded-full p-1 bg-gradient-to-r from-red-600 to-amber-500 shadow-lg mb-3">
                         <img src="about.png" alt="Phillip Lisomona" class="w-full h-full object-cover rounded-full">
                     </div>
                     <h4 class="font-bold text-base text-white">Phillip Lisomona</h4>
                     <p class="text-xs text-red-400 font-medium mb-3">Gospel Artist & Producer</p>
-                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">Spreading the message of hope, faith, and inspiration through powerful gospel melodies and new album releases.</p>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">Spreading the message of hope, faith, and inspiration through powerful gospel melodies and album releases.</p>
                     <button onclick="openContactModal()" class="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold uppercase transition-colors shadow-lg shadow-red-600/30">
                         Book / Contact Artist
                     </button>
@@ -175,8 +159,6 @@
     <!-- CUSTOM HTML5 BOTTOM AUDIO PLAYER BAR -->
     <div id="audioPlayerBar" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 px-4 py-3 shadow-2xl transition-all duration-300 translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            
-            <!-- Currently Playing Track Info -->
             <div class="flex items-center space-x-3 w-full sm:w-1/4">
                 <img id="playerThumb" src="about.png" alt="Cover" class="w-12 h-12 rounded-xl object-cover shadow border border-slate-800">
                 <div class="overflow-hidden">
@@ -185,14 +167,12 @@
                 </div>
             </div>
 
-            <!-- Player Controls & Timeline -->
             <div class="flex flex-col items-center w-full sm:w-2/4 space-y-1">
                 <div class="flex items-center space-x-6">
                     <button onclick="prevTrack()" class="text-slate-400 hover:text-white transition-colors text-sm"><i class="fa-solid fa-backward-step"></i></button>
                     <button id="playPauseBtn" onclick="togglePlay()" class="w-10 h-10 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center shadow-lg shadow-red-600/40 transition-transform active:scale-95"><i class="fa-solid fa-play ml-0.5"></i></button>
                     <button onclick="nextTrack()" class="text-slate-400 hover:text-white transition-colors text-sm"><i class="fa-solid fa-forward-step"></i></button>
                 </div>
-                <!-- Progress bar -->
                 <div class="w-full flex items-center space-x-2 text-[10px] text-slate-400">
                     <span id="currentTime">0:00</span>
                     <input type="range" id="seekSlider" min="0" max="100" value="0" oninput="seekAudio(this.value)" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-red-500">
@@ -200,7 +180,6 @@
                 </div>
             </div>
 
-            <!-- Volume & Close Player -->
             <div class="hidden sm:flex items-center space-x-4 w-1/4 justify-end">
                 <div class="flex items-center space-x-2 text-slate-400">
                     <i class="fa-solid fa-volume-high text-xs"></i>
@@ -211,7 +190,7 @@
         </div>
     </div>
 
-    <!-- CONTACT / BOOKING MODAL -->
+    <!-- CONTACT MODAL -->
     <div id="contactModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
             <button onclick="closeContactModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -242,17 +221,6 @@
         </div>
     </div>
 
-    <!-- DOWNLOAD MODAL / TOAST -->
-    <div id="toast" class="fixed bottom-24 right-4 z-50 bg-slate-900 border border-red-600/50 text-white px-5 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3">
-        <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white text-xs">
-            <i class="fa-solid fa-download"></i>
-        </div>
-        <div>
-            <h5 class="text-xs font-bold text-red-400" id="toastTitle">Download Started</h5>
-            <p class="text-[11px] text-slate-300" id="toastMsg">Your track is downloading successfully.</p>
-        </div>
-    </div>
-
     <!-- FOOTER -->
     <footer class="bg-black border-t border-slate-900 py-8 text-center text-xs text-slate-500 mt-auto">
         <div class="max-w-7xl mx-auto px-4 space-y-4">
@@ -269,226 +237,243 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Track Database updated with exact titles from files
-        const tracks = [
+        const albumsData = [
             {
-                id: 1,
-                title: "Phillip-Lisomona-Adam",
-                artist: "Phillip Lisomona",
-                category: "Audio",
-                typeTag: "NEW AUDIO",
-                typeColor: "bg-red-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Adam",
-                downloads: "24.5k",
-                duration: "3:45",
-                audioUrl: "Phillip-Lisomona_Adam.mp3"
+                id: "v1",
+                title: "Divine Grace Collection",
+                volume: "Volume v1",
+                img: "art.png",
+                tracks: [
+                    { title: "Phillip-Lisomona-Adam", duration: "3:45", sirc: "Phillip-Lisomona-Adam.mp3" },
+                    { title: "Phillip-Lisomona-Atunyamuke", duration: "4:12", sirc: "Phillip-Lisomona_Atunyamuke.mp3" },
+                    { title: "Phillip-Lisomona-Bulumbu", duration: "3:30", sirc: "Phillip-Lisomona_Bulumbu.mp3" },
+                    { title: "Phillip-Lisomona-Ico-nyimbila", duration: "4:05", sirc: "Phillip-Lisomona-Ico-nyimbila.mp3" },
+                    { title: "Phillip-Lisomona-Libizo", duration: "3:50", sirc: "Phillip-Lisomona-Libizo.mp3" },
+                    { title: "Phillip-Lisomona-Takuli-Kubota", duration: "4:20", sirc: "Phillip-Lisomona-Takuli-Kubota.mp3" },
+                    { title: "Phillip-Lisomona-Tuli-fimuti", duration: "3:40", sirc: "Phillip-Lisomona-Tuli-Fimuti.mp3" },
+                    { title: "Phillip-Lisomona-Tutamutami", duration: "3:55", sirc: "Phillip-Lisomona-Tutamutami.mp3" },
+                    { title: "Phillip-Lisomona-Tuyoomubona", duration: "4:15", sirc: "Phillip-Lisomona-Tuyoomubona.mp3" },
+                    { title: "Phillip-Lisomona-ft-Nachambwa", duration: "3:48", sirc: "Phillip-Lisomona-ft-Nachambwa_Aleisa.mp3" }
+                ]
             },
             {
-                id: 2,
-                title: "Phillip-Lisomona-Atunyamuke",
-                artist: "Phillip Lisomona",
-                category: "Gospel",
-                typeTag: "NEW GOSPEL",
-                typeColor: "bg-amber-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Atunyamuke",
-                downloads: "19.2k",
-                duration: "4:12",
-                audioUrl: "Phillip-Lisomona_Atunyamuke.mp3"
+                id: "v2",
+                title: "Praise & Worship Medley",
+                volume: "Volume v2",
+                img: "https://placehold.co/500x500/1e293b/f59e0b.png?text=Album+v2+Artwork",
+                tracks: [
+                    { title: "Phillip-Lisomona-Worship-One", duration: "4:00", sirc: "Phillip-Lisomona_Worship1.mp3" },
+                    { title: "Phillip-Lisomona-Worship-Two", duration: "3:52", sirc: "Phillip-Lisomona_Worship2.mp3" },
+                    { title: "Phillip-Lisomona-Mali-Yandi", duration: "4:10", sirc: "Phillip-Lisomona_MaliYandi.mp3" },
+                    { title: "Phillip-Lisomona-Lesa-Wesu", duration: "3:25", sirc: "Phillip-Lisomona_LesaWesu.mp3" },
+                    { title: "Phillip-Lisomona-Tontonkesha", duration: "4:30", sirc: "Phillip-Lisomona_Tontonkesha.mp3" },
+                    { title: "Phillip-Lisomona-Mutima-Wandi", duration: "3:45", sirc: "Phillip-Lisomona_MutimaWandi.mp3" },
+                    { title: "Phillip-Lisomona-Bupandu", duration: "3:50", sirc: "Phillip-Lisomona_Bupandu.mp3" },
+                    { title: "Phillip-Lisomona-Shuwa-Shuwa", duration: "4:15", sirc: "Phillip-Lisomona_ShuwaShuwa.mp3" },
+                    { title: "Phillip-Lisomona-Kwi-Tolo", duration: "3:35", sirc: "Phillip-Lisomona_KwiTolo.mp3" },
+                    { title: "Phillip-Lisomona-Alleluia-Amen", duration: "5:01", sirc: "Phillip-Lisomona_AlleluiaAmen.mp3" }
+                ]
             },
             {
-                id: 3,
-                title: "Phillip-Lisomona-Bulumbu",
-                artist: "Phillip Lisomona",
-                category: "Audio",
-                typeTag: "NEW AUDIO",
-                typeColor: "bg-red-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Bulumbu",
-                downloads: "18.1k",
-                duration: "3:30",
-                audioUrl: "Phillip-Lisomona_Bulumbu.mp3"
+                id: "v3",
+                title: "Spiritual Awakening",
+                volume: "Volume v3",
+                img: "https://placehold.co/500x500/1e293b/10b981.png?text=Album+v3+Artwork",
+                tracks: [
+                    { title: "Phillip-Lisomona-Awake-1", duration: "3:30", sirc: "Phillip-Lisomona_Awake1.mp3" },
+                    { title: "Phillip-Lisomona-Awake-2", duration: "4:05", sirc: "Phillip-Lisomona_Awake2.mp3" },
+                    { title: "Phillip-Lisomona-Nsansa-Nsha", duration: "3:40", sirc: "Phillip-Lisomona_NsansaNsha.mp3" },
+                    { title: "Phillip-Lisomona-Moyo-Wangu", duration: "4:12", sirc: "Phillip-Lisomona_MoyoWangu.mp3" },
+                    { title: "Phillip-Lisomona-Nkoloko", duration: "3:55", sirc: "Phillip-Lisomona_Nkoloko.mp3" },
+                    { title: "Phillip-Lisomona-Mibamba", duration: "3:20", sirc: "Phillip-Lisomona_Mibamba.mp3" },
+                    { title: "Phillip-Lisomona-Luse-Lobe", duration: "4:22", sirc: "Phillip-Lisomona_LuseLobe.mp3" },
+                    { title: "Phillip-Lisomona-Tata-Wesu", duration: "3:48", sirc: "Phillip-Lisomona_TataWesu.mp3" },
+                    { title: "Phillip-Lisomona-Ku-Buso", duration: "4:10", sirc: "Phillip-Lisomona_KuBuso.mp3" },
+                    { title: "Phillip-Lisomona-Final-Blessing", duration: "4:40", sirc: "Phillip-Lisomona_FinalBlessing.mp3" }
+                ]
             },
             {
-                id: 4,
-                title: "Phillip-Lisomona-Ico-nyimbila",
-                artist: "Phillip Lisomona",
-                category: "Gospel",
-                typeTag: "NEW ALBUM",
-                typeColor: "bg-purple-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/a855f7?text=Ico+Nyimbila",
-                downloads: "32.4k",
-                duration: "4:05",
-                audioUrl: "Phillip-Lisomona-Ico-nyimbila.mp3"
+                id: "v4",
+                title: "Inspirational Hymns",
+                volume: "Volume v4",
+                img: "https://placehold.co/500x500/1e293b/3b82f6.png?text=Album+v4+Artwork",
+                tracks: [
+                    { title: "Phillip-Lisomona-Hymn-1", duration: "3:50", sirc: "Phillip-Lisomona_Hymn1.mp3" },
+                    { title: "Phillip-Lisomona-Hymn-2", duration: "4:15", sirc: "Phillip-Lisomona_Hymn2.mp3" },
+                    { title: "Phillip-Lisomona-Kalemba", duration: "3:35", sirc: "Phillip-Lisomona_Kalemba.mp3" },
+                    { title: "Phillip-Lisomona-Mbuyu", duration: "4:00", sirc: "Phillip-Lisomona_Mbuyu.mp3" },
+                    { title: "Phillip-Lisomona-Ku-Mwamba", duration: "3:42", sirc: "Phillip-Lisomona_KuMwamba.mp3" },
+                    { title: "Phillip-Lisomona-Mweo-Wandi", duration: "3:58", sirc: "Phillip-Lisomona_MweoWandi.mp3" },
+                    { title: "Phillip-Lisomona-Imiti-Ikula", duration: "4:11", sirc: "Phillip-Lisomona_ImitiIkula.mp3" },
+                    { title: "Phillip-Lisomona-Ubufumu", duration: "3:29", sirc: "Phillip-Lisomona_Ubufumu.mp3" },
+                    { title: "Phillip-Lisomona-Nangu-Nkalifye", duration: "4:20", sirc: "Phillip-Lisomona_NanguNkalifye.mp3" },
+                    { title: "Phillip-Lisomona-Nsansa-Ijulu", duration: "4:05", sirc: "Phillip-Lisomona_NsansaIjulu.mp3" }
+                ]
             },
             {
-                id: 5,
-                title: "Phillip-Lisomona-Libizo",
-                artist: "Phillip Lisomona",
-                category: "Audio",
-                typeTag: "NEW AUDIO",
-                typeColor: "bg-red-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Libizo",
-                downloads: "21.8k",
-                duration: "3:50",
-                audioUrl: "Phillip-Lisomona-Libizo.mp3"
+                id: "v5",
+                title: "Gospel Anthems",
+                volume: "Volume v5",
+                img: "https://placehold.co/500x500/1e293b/8b5cf6.png?text=Album+v5+Artwork",
+                tracks: [
+                    { title: "Phillip-Lisomona-Anthem-1", duration: "4:02", sirc: "Phillip-Lisomona_Anthem1.mp3" },
+                    { title: "Phillip-Lisomona-Anthem-2", duration: "3:45", sirc: "Phillip-Lisomona_Anthem2.mp3" },
+                    { title: "Phillip-Lisomona-Mweende", duration: "3:55", sirc: "Phillip-Lisomona_Mweende.mp3" },
+                    { title: "Phillip-Lisomona-Nali-Nkutemenwe", duration: "4:18", sirc: "Phillip-Lisomona_NaliNkutemenwe.mp3" },
+                    { title: "Phillip-Lisomona-Tuleangaikila", duration: "3:30", sirc: "Phillip-Lisomona_Tuleangaikila.mp3" },
+                    { title: "Phillip-Lisomona-Bwalya", duration: "4:10", sirc: "Phillip-Lisomona_Bwalya.mp3" },
+                    { title: "Phillip-Lisomona-Chikonka", duration: "3:50", sirc: "Phillip-Lisomona_Chikonka.mp3" },
+                    { title: "Phillip-Lisomona-Mulungu-Wesu", duration: "3:40", sirc: "Phillip-Lisomona_MulunguWesu.mp3" },
+                    { title: "Phillip-Lisomona-Nsakalansa", duration: "4:25", sirc: "Phillip-Lisomona_Nsakalansa.mp3" },
+                    { title: "Phillip-Lisomona-Victoria", duration: "4:50", sirc: "Phillip-Lisomona_Victoria.mp3" }
+                ]
             },
             {
-                id: 6,
-                title: "Phillip-Lisomona-Takuli-Kubota",
-                artist: "Phillip Lisomona",
-                category: "Album",
-                typeTag: "NEW ALBUM",
-                typeColor: "bg-purple-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/a855f7?text=Takuli+Kubota",
-                downloads: "28.3k",
-                duration: "4:20",
-                audioUrl: "Phillip-Lisomona-Takuli-Kubota.mp3"
+                id: "v6",
+                title: "Restoration Tour",
+                volume: "Volume v6",
+                img: "https://placehold.co/500x500/1e293b/ec4899.png?text=Album+v6+Artwork",
+                tracks: [
+                    { title: "Phillip-Lisomona-Restore-1", duration: "3:48", sirc: "Phillip-Lisomona_Restore1.mp3" },
+                    { title: "Phillip-Lisomona-Restore-2", duration: "4:12", sirc: "Phillip-Lisomona_Restore2.mp3" },
+                    { title: "Phillip-Lisomona-Kuli-Lesa", duration: "3:33", sirc: "Phillip-Lisomona_KuliLesa.mp3" },
+                    { title: "Phillip-Lisomona-Imiku-Yesu", duration: "4:01", sirc: "Phillip-Lisomona_ImikuYesu.mp3" },
+                    { title: "Phillip-Lisomona-Mutende", duration: "3:50", sirc: "Phillip-Lisomona_Mutende.mp3" },
+                    { title: "Phillip-Lisomona-Tuleimbila", duration: "3:25", sirc: "Phillip-Lisomona_Tuleimbila.mp3" },
+                    { title: "Phillip-Lisomona-Nshailile", duration: "4:19", sirc: "Phillip-Lisomona_Nshailile.mp3" },
+                    { title: "Phillip-Lisomona-Bupokelele", duration: "3:55", sirc: "Phillip-Lisomona_Bupokelele.mp3" },
+                    { title: "Phillip-Lisomona-Luse-Lwandi", duration: "4:08", sirc: "Phillip-Lisomona_LuseLwandi.mp3" },
+                    { title: "Phillip-Lisomona-Amen-Asubila", duration: "4:30", sirc: "Phillip-Lisomona_AmenAsubila.mp3" }
+                ]
             },
             {
-                id: 7,
-                title: "Phillip-Lisomona-Tuli-fimuti",
-                artist: "Phillip Lisomona",
-                category: "Gospel",
-                typeTag: "NEW GOSPEL",
-                typeColor: "bg-amber-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Tuli+Fimuti",
-                downloads: "15.9k",
-                duration: "3:40",
-                audioUrl: "Phillip-Lisomona-Tuli-Fimuti.mp3"
-            },
-            {
-                id: 8,
-                title: "Phillip-Lisomona-Tutamutami",
-                artist: "Phillip Lisomona",
-                category: "Audio",
-                typeTag: "NEW AUDIO",
-                typeColor: "bg-red-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Tutamutami",
-                downloads: "22.1k",
-                duration: "3:55",
-                audioUrl: "Phillip-Lisomona-Tutamutami.mp3"
-            },
-            {
-                id: 9,
-                title: "Phillip-Lisomona-Tuyoomubona",
-                artist: "Phillip Lisomona",
-                category: "Album",
-                typeTag: "NEW ALBUM",
-                typeColor: "bg-purple-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/a855f7?text=Tuyoomubona",
-                downloads: "35.0k",
-                duration: "4:15",
-                audioUrl: "Phillip-Lisomona-Tuyoomubona.mp3"
-            },
-            {
-                id: 10,
-                title: "Phillip-Lisomona-ft-Nachambwa",
-                artist: "Phillip Lisomona ft Nachambwa",
-                category: "Audio",
-                typeTag: "FEATURED",
-                typeColor: "bg-emerald-600 text-white",
-                thumb: "https://placehold.co/400x300/1e293b/10b981?text=Ft+Nachambwa",
-                downloads: "41.2k",
-                duration: "3:48",
-                audioUrl: "Phillip-Lisomona-ft-Nachambwa_Aleisa.mp3"
+                id: "v7",
+                title: "Eternal Praise",
+                volume: "Volume v7",
+                img: "https://placehold.co/500x500/1e293b/06b6d4.png?text=Album+v7+Artwork",
+                tracks: [
+                    { title: "Phillip-Lisomona-Eternal-1", duration: "4:00", sirc: "Phillip-Lisomona_Eternal1.mp3" },
+                    { title: "Phillip-Lisomona-Eternal-2", duration: "3:45", sirc: "Phillip-Lisomona_Eternal2.mp3" },
+                    { title: "Phillip-Lisomona-Lesa-Mubambe", duration: "4:15", sirc: "Phillip-Lisomona_LesaMubambe.mp3" },
+                    { title: "Phillip-Lisomona-Tupashile", duration: "3:30", sirc: "Phillip-Lisomona_Tupashile.mp3" },
+                    { title: "Phillip-Lisomona-Mbuyu-Wesu", duration: "3:55", sirc: "Phillip-Lisomona_MbuyuWesu.mp3" },
+                    { title: "Phillip-Lisomona-Balumbanya", duration: "4:10", sirc: "Phillip-Lisomona_Balumbanya.mp3" },
+                    { title: "Phillip-Lisomona-Kuleka", duration: "3:42", sirc: "Phillip-Lisomona_Kuleka.mp3" },
+                    { title: "Phillip-Lisomona-Nangu-Nkwabe", duration: "4:20", sirc: "Phillip-Lisomona_NanguNkwabe.mp3" },
+                    { title: "Phillip-Lisomona-Chibote", duration: "3:50", sirc: "Phillip-Lisomona_Chibote.mp3" },
+                    { title: "Phillip-Lisomona-Final-Glory", duration: "5:10", sirc: "Phillip-Lisomona_FinalGlory.mp3" }
+                ]
             }
         ];
 
-        const missedSongs = [
-            {
-                id: 101,
-                title: "Phillip-Lisomona-Ico-nyimbila",
-                artist: "Phillip Lisomona",
-                thumb: "https://placehold.co/100x100/1e293b/a855f7?text=Album+1",
-                audioUrl: "Phillip-Lisomona-Ico-nyimbila.mp3"
-            },
-            {
-                id: 102,
-                title: "Phillip-Lisomona-Takuli-Kubota",
-                artist: "Phillip Lisomona",
-                thumb: "https://placehold.co/100x100/1e293b/a855f7?text=Album+2",
-                audioUrl: "Phillip-Lisomona-Takuli-Kubota.mp3"
-            },
-            {
-                id: 103,
-                title: "Phillip-Lisomona-Tuyoomubona",
-                artist: "Phillip Lisomona",
-                thumb: "https://placehold.co/100x100/1e293b/a855f7?text=Album+3",
-                audioUrl: "Phillip-Lisomona-Tuyoomubona.mp3"
-            }
-        ];
-
+        const selarLink = "https://selar.co/m/lisotech";
         let currentTrackIndex = 0;
-        let activePlaylist = tracks;
+        let activePlaylist = [];
         let isPlaying = false;
+        let currentPlayingUrl = null;
         const audioElement = new Audio();
+        let expandedAlbums = {};
 
         window.onload = function() {
-            renderTracks(tracks);
-            renderMissedSongs();
+            activePlaylist = albumsData.flatMap(album => album.tracks.map(t => ({
+                ...t,
+                artist: "Phillip Lisomona",
+                thumb: album.img,
+                category: "Album"
+            })));
+
+            renderAlbums(albumsData);
             
             audioElement.addEventListener('timeupdate', updateProgress);
             audioElement.addEventListener('ended', nextTrack);
         };
 
-        function renderTracks(list) {
+        function renderAlbums(list) {
             const grid = document.getElementById('songGrid');
-            document.getElementById('resultCount').innerText = `Showing ${list.length} tracks`;
+            document.getElementById('resultCount').innerText = `Showing ${list.length} Albums (v1 to v7)`;
             
             if (list.length === 0) {
-                grid.innerHTML = `<div class="col-span-2 text-center py-12 text-slate-500">No tracks found matching your query.</div>`;
+                grid.innerHTML = `<div class="col-span-2 text-center py-12 text-slate-500">No albums found matching your query.</div>`;
                 return;
             }
 
-            grid.innerHTML = list.map((track) => `
-                <div class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all group flex flex-col justify-between">
+            grid.innerHTML = list.map((album) => {
+                const isExpanded = expandedAlbums[album.id] || false;
+                
+                return `
+                <div id="album-${album.id}" class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all flex flex-col justify-between sm:col-span-2">
                     <div>
-                        <div class="relative overflow-hidden aspect-video bg-slate-950">
-                            <img src="${track.thumb}" alt="${track.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/1e293b/ef4444?text=Track'">
-                            <span class="absolute top-2.5 left-2.5 text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow ${track.typeColor}">${track.typeTag}</span>
-                            <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur text-[10px] text-white px-2 py-0.5 rounded">${track.duration}</span>
-                            <button onclick="playTrackById(${track.id})" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl transform scale-90 group-hover:scale-100 transition-transform">
-                                    <i class="fa-solid fa-play ml-0.5"></i>
+                        <!-- Album Header Banner: Click Artwork to toggle 10 tracks -->
+                        <div class="relative overflow-hidden aspect-[21/9] bg-slate-950 group cursor-pointer" onclick="toggleAlbumTracks('${album.id}')">
+                            <!-- 500x500 PNG Artwork tag -->
+                            <img src="${album.img}" alt="${album.title}" width="500" height="500" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5">
+                                <div class="flex items-center justify-between flex-wrap gap-3">
+                                    <div>
+                                        <span class="bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-wider">${album.volume}</span>
+                                        <h3 class="text-lg sm:text-xl font-black text-white mt-1 group-hover:text-red-400 transition-colors">${album.title}</h3>
+                                        <p class="text-xs text-slate-300 font-medium">Phillip Lisomona • 10 Tracks (Click Artwork to view tracks)</p>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button onclick="event.stopPropagation(); window.open('${selarLink}', '_blank')" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-1.5">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                            <span>Buy this Album</span>
+                                        </button>
+                                        <div class="bg-red-600/90 hover:bg-red-600 text-white px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-lg shadow-red-600/40 flex items-center space-x-1">
+                                            <span>${isExpanded ? 'Hide Tracks' : 'View Tracks'}</span>
+                                            <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'}"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            </button>
+                            </div>
                         </div>
-                        <div class="p-4">
-                            <h4 class="font-bold text-sm text-white line-clamp-1 mb-1 group-hover:text-red-400 transition-colors">${track.title}</h4>
-                            <p class="text-xs text-slate-400 font-medium mb-3">${track.artist}</p>
-                            <div class="flex items-center justify-between text-[11px] text-slate-500">
-                                <span><i class="fa-solid fa-download mr-1"></i> ${track.downloads}</span>
-                                <span class="uppercase font-bold text-red-500/80">${track.category}</span>
+
+                        <!-- Expandable Tracks List Container with 'sirc' audio tags -->
+                        <div id="tracks-container-${album.id}" class="${isExpanded ? 'block' : 'hidden'} p-4 space-y-2 bg-slate-950/80 border-t border-slate-800">
+                            <h4 class="text-[11px] font-bold uppercase tracking-wider text-red-500 mb-2">Album Tracklist (${album.volume}) - Click Stream to Play/Pause</h4>
+                            <div class="space-y-1.5">
+                                ${album.tracks.map((track, idx) => {
+                                    const isThisPlaying = (currentPlayingUrl === track.sirc && isPlaying);
+                                    return `
+                                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800/80 transition-colors group">
+                                        <div class="flex items-center space-x-3 overflow-hidden">
+                                            <span class="text-xs font-bold text-slate-500 w-5 text-right">#${idx + 1}</span>
+                                            <div class="overflow-hidden">
+                                                <!-- Audio source tag referenced as sirc -->
+                                                <h5 class="text-xs font-bold text-slate-200 truncate group-hover:text-red-400 transition-colors" sirc="${track.sirc}">${track.title}</h5>
+                                                <span class="text-[10px] text-slate-400 font-medium">${album.volume} • ${track.duration}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 shrink-0">
+                                            <button onclick="toggleTrackPlay('${album.id}', ${idx})" class="px-3 py-1.5 rounded-lg ${isThisPlaying ? 'bg-red-600 text-white' : 'bg-slate-800 group-hover:bg-red-600 text-slate-300 group-hover:text-white'} text-xs font-bold transition-colors shadow flex items-center space-x-1">
+                                                <i class="fa-solid fa-${isThisPlaying ? 'pause' : 'play'} text-[10px]"></i>
+                                                <span>${isThisPlaying ? 'Pause' : 'Stream'}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    `;
+                                }).join('')}
                             </div>
                         </div>
                     </div>
-                    <div class="px-4 pb-4 pt-0 grid grid-cols-2 gap-2">
-                        <button onclick="playTrackById(${track.id})" class="py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors flex items-center justify-center space-x-1.5">
-                            <i class="fa-solid fa-play text-[10px] text-red-500"></i>
-                            <span>Stream</span>
-                        </button>
-                        <button onclick="downloadTrack('${track.title}')" class="py-2 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs font-bold transition-colors flex items-center justify-center space-x-1.5 border border-red-600/30">
-                            <i class="fa-solid fa-download text-[10px]"></i>
-                            <span>Download</span>
-                        </button>
-                    </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
-        function renderMissedSongs() {
-            const container = document.getElementById('missedSongsList');
-            container.innerHTML = missedSongs.map(song => `
-                <div onclick="playMissedSong('${song.audioUrl}', '${song.title}', '${song.artist}', '${song.thumb}')" class="flex items-center space-x-3 p-2 rounded-xl hover:bg-slate-800/60 cursor-pointer transition-colors group">
-                    <img src="${song.thumb}" alt="thumb" class="w-12 h-12 rounded-lg object-cover shrink-0 border border-slate-700">
-                    <div class="overflow-hidden flex-grow">
-                        <h5 class="text-xs font-bold text-slate-200 truncate group-hover:text-red-400 transition-colors">${song.title}</h5>
-                        <p class="text-[10px] text-slate-400 font-medium">${song.artist}</p>
-                    </div>
-                    <button class="w-8 h-8 rounded-full bg-slate-800 group-hover:bg-red-600 text-slate-300 group-hover:text-white flex items-center justify-center text-xs transition-colors shrink-0">
-                        <i class="fa-solid fa-play ml-0.5"></i>
-                    </button>
-                </div>
-            `).join('');
+        function toggleAlbumTracks(albumId) {
+            expandedAlbums[albumId] = !expandedAlbums[albumId];
+            renderAlbums(albumsData);
+        }
+
+        function scrollToAlbum(albumId) {
+            expandedAlbums[albumId] = true;
+            renderAlbums(albumsData);
+            const el = document.getElementById(`album-${albumId}`);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function filterCategory(cat) {
@@ -500,65 +485,70 @@
                 }
             });
 
-            if (cat === 'All') {
-                activePlaylist = tracks;
-            } else {
-                activePlaylist = tracks.filter(t => t.category.toLowerCase() === cat.toLowerCase());
-            }
-            renderTracks(activePlaylist);
+            renderAlbums(albumsData);
         }
 
         function handleSearch(query) {
             const q = query.toLowerCase();
-            const filtered = tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q) || t.category.toLowerCase().includes(q));
-            renderTracks(filtered);
+            const filtered = albumsData.filter(album => 
+                album.title.toLowerCase().includes(q) || 
+                album.volume.toLowerCase().includes(q) || 
+                album.tracks.some(t => t.title.toLowerCase().includes(q))
+            );
+            renderAlbums(filtered);
         }
 
         function clearSearch() {
             document.getElementById('searchInput').value = '';
-            renderTracks(tracks);
+            renderAlbums(albumsData);
         }
 
         function focusSearch() {
             document.getElementById('searchInput').focus();
         }
 
-        function playTrackById(id) {
-            const index = tracks.findIndex(t => t.id === id);
-            if (index !== -1) {
-                currentTrackIndex = index;
-                activePlaylist = tracks;
-                loadAndPlayTrack(tracks[currentTrackIndex]);
+        function toggleTrackPlay(albumId, trackIdx) {
+            const album = albumsData.find(a => a.id === albumId);
+            if (!album) return;
+            const track = album.tracks[trackIdx];
+
+            activePlaylist = album.tracks.map(t => ({
+                ...t,
+                artist: "Phillip Lisomona",
+                thumb: album.img
+            }));
+            currentTrackIndex = trackIdx;
+
+            if (currentPlayingUrl === track.sirc) {
+                togglePlay();
+            } else {
+                currentPlayingUrl = track.sirc;
+                loadAndPlayTrack({
+                    title: track.title,
+                    artist: "Phillip Lisomona (" + album.volume + ")",
+                    thumb: album.img,
+                    sirc: track.sirc
+                });
             }
         }
 
-        function playMissedSong(url, title, artist, thumb) {
-            audioElement.src = url;
-            audioElement.play();
-            isPlaying = true;
-            
-            document.getElementById('playerTitle').innerText = title;
-            document.getElementById('playerArtist').innerText = artist;
-            document.getElementById('playerThumb').src = thumb;
-            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
-            document.getElementById('audioPlayerBar').classList.remove('translate-y-full');
-        }
-
         function loadAndPlayTrack(track) {
-            audioElement.src = track.audioUrl;
+            audioElement.src = track.sirc;
             audioElement.play();
             isPlaying = true;
+            currentPlayingUrl = track.sirc;
 
             document.getElementById('playerTitle').innerText = track.title;
             document.getElementById('playerArtist').innerText = track.artist;
             document.getElementById('playerThumb').src = track.thumb;
             document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
             document.getElementById('audioPlayerBar').classList.remove('translate-y-full');
+            renderAlbums(albumsData);
         }
 
         function togglePlay() {
-            if (!audioElement.src && tracks.length > 0) {
-                loadAndPlayTrack(tracks[0]);
+            if (!audioElement.src && albumsData.length > 0) {
+                toggleTrackPlay('v1', 0);
                 return;
             }
             if (isPlaying) {
@@ -570,23 +560,51 @@
                 isPlaying = true;
                 document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
             }
+            renderAlbums(albumsData);
         }
 
         function nextTrack() {
+            if (activePlaylist.length === 0) return;
             currentTrackIndex = (currentTrackIndex + 1) % activePlaylist.length;
-            loadAndPlayTrack(activePlaylist[currentTrackIndex]);
+            const t = activePlaylist[currentTrackIndex];
+            currentPlayingUrl = t.sirc;
+            loadAndPlayTrack({
+                title: t.title,
+                artist: t.artist || "Phillip Lisomona",
+                thumb: t.thumb,
+                sirc: t.sirc
+            });
         }
 
         function prevTrack() {
+            if (activePlaylist.length === 0) return;
             currentTrackIndex = (currentTrackIndex - 1 + activePlaylist.length) % activePlaylist.length;
-            loadAndPlayTrack(activePlaylist[currentTrackIndex]);
+            const t = activePlaylist[currentTrackIndex];
+            currentPlayingUrl = t.sirc;
+            loadAndPlayTrack({
+                title: t.title,
+                artist: t.artist || "Phillip Lisomona",
+                thumb: t.thumb,
+                sirc: t.sirc
+            });
         }
+
+        audioElement.addEventListener('pause', () => {
+            isPlaying = false;
+            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play ml-0.5"></i>';
+            renderAlbums(albumsData);
+        });
+
+        audioElement.addEventListener('play', () => {
+            isPlaying = true;
+            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+            renderAlbums(albumsData);
+        });
 
         function updateProgress() {
             if (audioElement.duration) {
                 const progressPercent = (audioElement.currentTime / audioElement.duration) * 100;
                 document.getElementById('seekSlider').value = progressPercent;
-                
                 document.getElementById('currentTime').innerText = formatTime(audioElement.currentTime);
                 document.getElementById('durationTime').innerText = formatTime(audioElement.duration);
             }
@@ -605,24 +623,15 @@
         function closePlayerBar() {
             audioElement.pause();
             isPlaying = false;
+            currentPlayingUrl = null;
             document.getElementById('audioPlayerBar').classList.add('translate-y-full');
+            renderAlbums(albumsData);
         }
 
         function formatTime(secs) {
             const m = Math.floor(secs / 60);
             const s = Math.floor(secs % 60);
             return `${m}:${s < 10 ? '0' : ''}${s}`;
-        }
-
-        function downloadTrack(title) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastTitle').innerText = "Download Initialized";
-            document.getElementById('toastMsg').innerText = `Downloading "${title}" securely...`;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 4000);
         }
 
         function toggleMobileMenu() {
