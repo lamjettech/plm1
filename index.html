@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phillip Lisomona - Official Music & Download Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#ef4444',
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow { animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white pb-28">
+
+    <!-- TOP NAVIGATION BAR (CituMuzik Style) -->
+    <header class="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-headphones text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-black tracking-wider bg-gradient-to-r from-red-500 via-amber-400 to-white bg-clip-text text-transparent">PHILLIP LISOMONA</span>
+                        <span class="block text-[10px] tracking-widest text-slate-400 font-semibold uppercase">Official Music Empire</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-8 font-semibold text-sm tracking-wide">
+                    <a href="#home" onclick="filterCategory('All')" class="text-red-500 hover:text-red-400 transition-colors nav-link active" data-cat="All">HOME</a>
+                    <a href="#audio" onclick="filterCategory('Audio')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Audio">AUDIO</a>
+                    <a href="#gospel" onclick="filterCategory('Gospel')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Gospel">GOSPEL</a>
+                    <a href="#video" onclick="filterCategory('Video')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Video">VIDEO</a>
+                    <a href="#lyrics" onclick="filterCategory('Lyrics')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Lyrics">LYRICS</a>
+                    <a href="#contact" onclick="openContactModal()" class="text-slate-300 hover:text-red-400 transition-colors">CONTACT</a>
+                </nav>
+
+                <!-- Search Icon / Mobile Menu Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="focusSearch()" class="w-10 h-10 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
+            <a href="#home" onclick="filterCategory('All'); toggleMobileMenu();" class="block text-red-500 font-semibold py-1">HOME</a>
+            <a href="#audio" onclick="filterCategory('Audio'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">AUDIO</a>
+            <a href="#gospel" onclick="filterCategory('Gospel'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">GOSPEL</a>
+            <a href="#video" onclick="filterCategory('Video'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">VIDEO</a>
+            <a href="#lyrics" onclick="filterCategory('Lyrics'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">LYRICS</a>
+            <a href="#contact" onclick="openContactModal(); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">CONTACT</a>
+        </div>
+    </header>
+
+    <!-- MARQUEE / HEADER ANNOUNCEMENT BANNER -->
+    <div class="bg-gradient-to-r from-red-950 via-red-900 to-slate-950 border-b border-red-900/50 py-3 shadow-inner overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-center sm:justify-start space-x-3 text-center sm:text-left">
+            <span class="bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-1 rounded tracking-wider animate-pulse shrink-0">HOT HITS</span>
+            <div class="overflow-hidden whitespace-nowrap">
+                <p class="text-xs sm:text-sm font-medium text-red-100 tracking-wide inline-block animate-[marquee_20s_linear_infinite]">
+                    🔥 Download Latest Afrobeats, Amapiano & Gospel Bangers by Phillip Lisomona — Stream & Download Free Today! 🎵
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT LAYOUT (Dual Column like CituMuzik) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- LEFT 2 COLUMNS: Main Song Grid -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Category Filter Pills Bar -->
+                <div class="flex items-center justify-between flex-wrap gap-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800 shadow-md">
+                    <div class="flex items-center space-x-2 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto">
+                        <button onclick="filterCategory('All')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg shadow-red-600/30" data-cat="All">All Hits</button>
+                        <button onclick="filterCategory('Audio')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Audio">Audio</button>
+                        <button onclick="filterCategory('Gospel')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Gospel">Gospel</button>
+                        <button onclick="filterCategory('Video')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Video">Video</button>
+                    </div>
+                    <span id="resultCount" class="text-xs text-slate-400 font-medium hidden sm:inline">Showing all tracks</span>
+                </div>
+
+                <!-- Song Cards Container -->
+                <div id="songGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Dynamic populated by JS -->
+                </div>
+            </div>
+
+            <!-- RIGHT 1 COLUMN: Sidebar (Live Search & Missed Songs) -->
+            <aside class="space-y-6">
+                
+                <!-- Live Search Box Widget -->
+                <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-red-500 mb-3 flex items-center space-x-2">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Search Music</span>
+                    </h3>
+                    <div class="relative">
+                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Type here to search track or producer..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-red-500 transition-colors">
+                        <button onclick="clearSearch()" class="absolute right-3 top-3.5 text-slate-400 hover:text-white text-xs">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Songs You May Have Missed Widget -->
+                <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-red-500 mb-4 flex items-center space-x-2 pb-2 border-b border-slate-800">
+                        <i class="fa-solid fa-fire"></i>
+                        <span>Songs You May Have Missed</span>
+                    </h3>
+                    <div id="missedSongsList" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Artist Profile Quick Card -->
+                <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-red-950 rounded-2xl border border-slate-800 p-5 shadow-xl text-center">
+                    <div class="w-20 h-20 mx-auto rounded-full p-1 bg-gradient-to-r from-red-600 to-amber-500 shadow-lg mb-3">
+                        <img src="https://placehold.co/200x200/1e293b/ef4444?text=PL" alt="Phillip Lisomona" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h4 class="font-bold text-base text-white">Phillip Lisomona</h4>
+                    <p class="text-xs text-red-400 font-medium mb-3">Top Producer & Artist</p>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">Bringing you the finest African rhythms, Amapiano, and uplifting Gospel melodies straight from the studio.</p>
+                    <button onclick="openContactModal()" class="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold uppercase transition-colors shadow-lg shadow-red-600/30">
+                        Book / Contact Producer
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- CUSTOM HTML5 BOTTOM AUDIO PLAYER BAR -->
+    <div id="audioPlayerBar" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 px-4 py-3 shadow-2xl transition-all duration-300 translate-y-full">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <!-- Currently Playing Track Info -->
+            <div class="flex items-center space-x-3 w-full sm:w-1/4">
+                <img id="playerThumb" src="https://placehold.co/100x100/1e293b/ef4444?text=PL" alt="Cover" class="w-12 h-12 rounded-xl object-cover shadow border border-slate-800">
+                <div class="overflow-hidden">
+                    <h4 id="playerTitle" class="text-xs sm:text-sm font-bold text-white truncate">Select a track to play</h4>
+                    <p id="playerArtist" class="text-[11px] text-red-400 truncate font-medium">Phillip Lisomona</p>
+                </div>
+            </div>
+
+            <!-- Player Controls & Timeline -->
+            <div class="flex flex-col items-center w-full sm:w-2/4 space-y-1">
+                <div class="flex items-center space-x-6">
+                    <button onclick="prevTrack()" class="text-slate-400 hover:text-white transition-colors text-sm"><i class="fa-solid fa-backward-step"></i></button>
+                    <button id="playPauseBtn" onclick="togglePlay()" class="w-10 h-10 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center shadow-lg shadow-red-600/40 transition-transform active:scale-95"><i class="fa-solid fa-play ml-0.5"></i></button>
+                    <button onclick="nextTrack()" class="text-slate-400 hover:text-white transition-colors text-sm"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
+                <!-- Progress bar -->
+                <div class="w-full flex items-center space-x-2 text-[10px] text-slate-400">
+                    <span id="currentTime">0:00</span>
+                    <input type="range" id="seekSlider" min="0" max="100" value="0" oninput="seekAudio(this.value)" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-red-500">
+                    <span id="durationTime">0:00</span>
+                </div>
+            </div>
+
+            <!-- Volume & Close Player -->
+            <div class="hidden sm:flex items-center space-x-4 w-1/4 justify-end">
+                <div class="flex items-center space-x-2 text-slate-400">
+                    <i class="fa-solid fa-volume-high text-xs"></i>
+                    <input type="range" min="0" max="1" step="0.05" value="1" onchange="setVolume(this.value)" class="w-20 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-red-500">
+                </div>
+                <button onclick="closePlayerBar()" class="text-slate-500 hover:text-slate-300 text-sm ml-2"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT / BOOKING MODAL -->
+    <div id="contactModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="closeContactModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mx-auto mb-2 text-xl">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Contact Phillip Lisomona</h3>
+                <p class="text-xs text-slate-400">For bookings, beat leasing, and artist collaborations.</p>
+            </div>
+            <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Your Name</label>
+                    <input type="text" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-red-500" placeholder="e.g. John Doe">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+                    <input type="email" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-red-500" placeholder="e.g. john@example.com">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Message / Inquiry</label>
+                    <textarea rows="3" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-red-500" placeholder="Write your message here..."></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs uppercase transition-colors shadow-lg shadow-red-600/30">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DOWNLOAD MODAL / POPUP MESSAGE -->
+    <div id="toast" class="fixed bottom-24 right-4 z-50 bg-slate-900 border border-red-600/50 text-white px-5 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white text-xs">
+            <i class="fa-solid fa-download"></i>
+        </div>
+        <div>
+            <h5 class="text-xs font-bold text-red-400" id="toastTitle">Download Started</h5>
+            <p class="text-[11px] text-slate-300" id="toastMsg">Your track is downloading successfully.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-slate-900 py-8 text-center text-xs text-slate-500 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <p class="font-semibold text-slate-400">© 2026 Phillip Lisomona Music Distribution. All Rights Reserved.</p>
+            <div class="flex justify-center space-x-6 text-slate-400 text-sm">
+                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+            <p class="text-[10px] text-slate-600">Designed with CituMuzik Portal layout standards for African Hitmakers.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Track Database
+        const tracks = [
+            {
+                id: 1,
+                title: "Phillip Lisomona Ft Rayvanny – Amapiano Vibe",
+                artist: "Phillip Lisomona Ft Rayvanny",
+                category: "Audio",
+                typeTag: "NEW AUDIO",
+                typeColor: "bg-red-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Amapiano+Vibe",
+                downloads: "42.5k",
+                duration: "3:45",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                lyrics: "Verse 1: Yeah, Phillip Lisomona on the beat...\nMoving through the rhythm, Amapiano heat...\nChorus: Dance to the groove, feel the bassline drop..."
+            },
+            {
+                id: 2,
+                title: "Phillip Lisomona – Grace & Glory (Gospel)",
+                artist: "Phillip Lisomona",
+                category: "Gospel",
+                typeTag: "NEW GOSPEL",
+                typeColor: "bg-amber-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Grace+and+Glory",
+                downloads: "19.2k",
+                duration: "4:12",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                lyrics: "Intro: Hallelujah...\nVerse: Count your blessings every single day...\nLord you guide me when I lose my way..."
+            },
+            {
+                id: 3,
+                title: "Phillip Lisomona Ft Harmonize – Nakubabu Remix (Official Video)",
+                artist: "Phillip Lisomona Ft Harmonize",
+                category: "Video",
+                typeTag: "NEW VIDEO",
+                typeColor: "bg-blue-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/3b82f6?text=Nakubabu+Video",
+                downloads: "88.1k",
+                duration: "3:20",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                lyrics: "Visuals playing on screen...\nNakubabu yangu weee..."
+            },
+            {
+                id: 4,
+                title: "Phillip Lisomona – Lusaka to Jozi (Afrobeat)",
+                artist: "Phillip Lisomona",
+                category: "Audio",
+                typeTag: "HOT AUDIO",
+                typeColor: "bg-red-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/ef4444?text=Lusaka+to+Jozi",
+                downloads: "31.4k",
+                duration: "3:15",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                lyrics: "From Lusaka city down to Johannesburg...\nWe making waves across the continent..."
+            },
+            {
+                id: 5,
+                title: "Phillip Lisomona Ft Pompi – Nyimbo Yangu (Gospel)",
+                artist: "Phillip Lisomona Ft Pompi",
+                category: "Gospel",
+                typeTag: "NEW GOSPEL",
+                typeColor: "bg-amber-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/f59e0b?text=Nyimbo+Yangu",
+                downloads: "24.8k",
+                duration: "4:50",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                lyrics: "Huu ni wimbo wangu wa sifa...\nKumtukuza Bwana wa mabwana..."
+            },
+            {
+                id: 6,
+                title: "Phillip Lisomona – Studio Sessions Documentary (Video)",
+                artist: "Phillip Lisomona",
+                category: "Video",
+                typeTag: "NEW VIDEO",
+                typeColor: "bg-blue-600 text-white",
+                thumb: "https://placehold.co/400x300/1e293b/3b82f6?text=Studio+Docu",
+                downloads: "15.0k",
+                duration: "5:02",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+                lyrics: "[Instrumental Documentary Video]"
+            }
+        ];
+
+        const missedSongs = [
+            {
+                id: 101,
+                title: "Phillip Lisomona – Gonkoto Pamwe",
+                artist: "Phillip Lisomona",
+                thumb: "https://placehold.co/100x100/1e293b/ef4444?text=Gonkoto",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+                typeTag: "AUDIO"
+            },
+            {
+                id: 102,
+                title: "Phillip Lisomona Ft Yo Maps – Sukuma Mkami",
+                artist: "Phillip Lisomona Ft Yo Maps",
+                thumb: "https://placehold.co/100x100/1e293b/f59e0b?text=Sukuma",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+                typeTag: "AUDIO"
+            },
+            {
+                id: 103,
+                title: "Phillip Lisomona – Nakuabudu (Acoustic)",
+                artist: "Phillip Lisomona",
+                thumb: "https://placehold.co/100x100/1e293b/3b82f6?text=Acoustic",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
+                typeTag: "GOSPEL"
+            },
+            {
+                id: 104,
+                title: "Phillip Lisomona – Urukundo Live Performance",
+                artist: "Phillip Lisomona",
+                thumb: "https://placehold.co/100x100/1e293b/10b981?text=Live",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+                typeTag: "VIDEO"
+            }
+        ];
+
+        let currentTrackIndex = 0;
+        let activePlaylist = tracks;
+        let isPlaying = false;
+        const audioElement = new Audio();
+
+        // Initialize App on Load
+        window.onload = function() {
+            renderTracks(tracks);
+            renderMissedSongs();
+            
+            audioElement.addEventListener('timeupdate', updateProgress);
+            audioElement.addEventListener('ended', nextTrack);
+        };
+
+        function renderTracks(list) {
+            const grid = document.getElementById('songGrid');
+            document.getElementById('resultCount').innerText = `Showing ${list.length} tracks`;
+            
+            if (list.length === 0) {
+                grid.innerHTML = `<div class="col-span-2 text-center py-12 text-slate-500">No tracks found matching your query.</div>`;
+                return;
+            }
+
+            grid.innerHTML = list.map((track, idx) => `
+                <div class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden aspect-video bg-slate-950">
+                            <img src="${track.thumb}" alt="${track.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/1e293b/ef4444?text=Track'">
+                            <span class="absolute top-2.5 left-2.5 text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow ${track.typeColor}">${track.typeTag}</span>
+                            <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur text-[10px] text-white px-2 py-0.5 rounded">${track.duration}</span>
+                            <button onclick="playTrackById(${track.id})" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl transform scale-90 group-hover:scale-100 transition-transform">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-sm text-white line-clamp-1 mb-1 group-hover:text-red-400 transition-colors">${track.title}</h4>
+                            <p class="text-xs text-slate-400 font-medium mb-3">${track.artist}</p>
+                            <div class="flex items-center justify-between text-[11px] text-slate-500">
+                                <span><i class="fa-solid fa-download mr-1"></i> ${track.downloads}</span>
+                                <span class="uppercase font-bold text-red-500/80">${track.category}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4 pt-0 grid grid-cols-2 gap-2">
+                        <button onclick="playTrackById(${track.id})" class="py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors flex items-center justify-center space-x-1.5">
+                            <i class="fa-solid fa-play text-[10px] text-red-500"></i>
+                            <span>Stream</span>
+                        </button>
+                        <button onclick="downloadTrack('${track.title}')" class="py-2 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs font-bold transition-colors flex items-center justify-center space-x-1.5 border border-red-600/30">
+                            <i class="fa-solid fa-download text-[10px]"></i>
+                            <span>Download</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMissedSongs() {
+            const container = document.getElementById('missedSongsList');
+            container.innerHTML = missedSongs.map(song => `
+                <div onclick="playMissedSong('${song.audioUrl}', '${song.title}', '${song.artist}', '${song.thumb}')" class="flex items-center space-x-3 p-2 rounded-xl hover:bg-slate-800/60 cursor-pointer transition-colors group">
+                    <img src="${song.thumb}" alt="thumb" class="w-12 h-12 rounded-lg object-cover shrink-0 border border-slate-700">
+                    <div class="overflow-hidden flex-grow">
+                        <h5 class="text-xs font-bold text-slate-200 truncate group-hover:text-red-400 transition-colors">${song.title}</h5>
+                        <p class="text-[10px] text-slate-400 font-medium">${song.artist}</p>
+                    </div>
+                    <button class="w-8 h-8 rounded-full bg-slate-800 group-hover:bg-red-600 text-slate-300 group-hover:text-white flex items-center justify-center text-xs transition-colors shrink-0">
+                        <i class="fa-solid fa-play ml-0.5"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(cat) {
+            // Update active pill button style
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg shadow-red-600/30";
+                } else {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-800 text-slate-300 hover:bg-slate-700";
+                }
+            });
+
+            if (cat === 'All') {
+                activePlaylist = tracks;
+            } else {
+                activePlaylist = tracks.filter(t => t.category.toLowerCase() === cat.toLowerCase());
+            }
+            renderTracks(activePlaylist);
+        }
+
+        function handleSearch(query) {
+            const q = query.toLowerCase();
+            const filtered = tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q) || t.category.toLowerCase().includes(q));
+            renderTracks(filtered);
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            renderTracks(tracks);
+        }
+
+        function focusSearch() {
+            document.getElementById('searchInput').focus();
+        }
+
+        function playTrackById(id) {
+            const index = tracks.findIndex(t => t.id === id);
+            if (index !== -1) {
+                currentTrackIndex = index;
+                activePlaylist = tracks;
+                loadAndPlayTrack(tracks[currentTrackIndex]);
+            }
+        }
+
+        function playMissedSong(url, title, artist, thumb) {
+            audioElement.src = url;
+            audioElement.play();
+            isPlaying = true;
+            
+            document.getElementById('playerTitle').innerText = title;
+            document.getElementById('playerArtist').innerText = artist;
+            document.getElementById('playerThumb').src = thumb;
+            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+            document.getElementById('audioPlayerBar').classList.remove('translate-y-full');
+        }
+
+        function loadAndPlayTrack(track) {
+            audioElement.src = track.audioUrl;
+            audioElement.play();
+            isPlaying = true;
+
+            document.getElementById('playerTitle').innerText = track.title;
+            document.getElementById('playerArtist').innerText = track.artist;
+            document.getElementById('playerThumb').src = track.thumb;
+            document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+            document.getElementById('audioPlayerBar').classList.remove('translate-y-full');
+        }
+
+        function togglePlay() {
+            if (!audioElement.src && tracks.length > 0) {
+                loadAndPlayTrack(tracks[0]);
+                return;
+            }
+            if (isPlaying) {
+                audioElement.pause();
+                isPlaying = false;
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play ml-0.5"></i>';
+            } else {
+                audioElement.play();
+                isPlaying = true;
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % activePlaylist.length;
+            loadAndPlayTrack(activePlaylist[currentTrackIndex]);
+        }
+
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + activePlaylist.length) % activePlaylist.length;
+            loadAndPlayTrack(activePlaylist[currentTrackIndex]);
+        }
+
+        function updateProgress() {
+            if (audioElement.duration) {
+                const progressPercent = (audioElement.currentTime / audioElement.duration) * 100;
+                document.getElementById('seekSlider').value = progressPercent;
+                
+                document.getElementById('currentTime').innerText = formatTime(audioElement.currentTime);
+                document.getElementById('durationTime').innerText = formatTime(audioElement.duration);
+            }
+        }
+
+        function seekAudio(val) {
+            if (audioElement.duration) {
+                audioElement.currentTime = (val / 100) * audioElement.duration;
+            }
+        }
+
+        function setVolume(val) {
+            audioElement.volume = val;
+        }
+
+        function closePlayerBar() {
+            audioElement.pause();
+            isPlaying = false;
+            document.getElementById('audioPlayerBar').classList.add('translate-y-full');
+        }
+
+        function formatTime(secs) {
+            const m = Math.floor(secs / 60);
+            const s = Math.floor(secs % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        function downloadTrack(title) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').innerText = "Download Initialized";
+            document.getElementById('toastMsg').innerText = `Downloading "${title}" securely...`;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 4000);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            closeContactModal();
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').innerText = "Message Sent";
+            document.getElementById('toastMsg').innerText = "Phillip Lisomona's management team will contact you soon.";
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 4000);
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
