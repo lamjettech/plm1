@@ -221,6 +221,19 @@
         </div>
     </div>
 
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-28 right-4 z-50 bg-slate-900 border border-slate-700 rounded-2xl p-4 shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 max-w-sm">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <h5 id="toastTitle" class="text-xs font-bold text-white">Notification</h5>
+                <p id="toastMsg" class="text-[11px] text-slate-400">Action completed successfully.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="bg-black border-t border-slate-900 py-8 text-center text-xs text-slate-500 mt-auto">
         <div class="max-w-7xl mx-auto px-4 space-y-4">
@@ -240,9 +253,9 @@
         const albumsData = [
             {
                 id: "v1",
-                title: "Divine Grace Collection",
-                volume: "Volume v1",
-                img: "art.png",
+                title: "Hena Ndileelela",
+                volume: "Volume 1",
+                img: "v1.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Adam", duration: "3:45", sirc: "Phillip-Lisomona-Adam.mp3" },
                     { title: "Phillip-Lisomona-Atunyamuke", duration: "4:12", sirc: "Phillip-Lisomona_Atunyamuke.mp3" },
@@ -258,9 +271,9 @@
             },
             {
                 id: "v2",
-                title: "Praise & Worship Medley",
-                volume: "Volume v2",
-                img: "https://placehold.co/500x500/1e293b/f59e0b.png?text=Album+v2+Artwork",
+                title: "Katulyaambilila",
+                volume: "Volume 2",
+                img: "v2.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Worship-One", duration: "4:00", sirc: "Phillip-Lisomona_Worship1.mp3" },
                     { title: "Phillip-Lisomona-Worship-Two", duration: "3:52", sirc: "Phillip-Lisomona_Worship2.mp3" },
@@ -276,9 +289,9 @@
             },
             {
                 id: "v3",
-                title: "Spiritual Awakening",
-                volume: "Volume v3",
-                img: "https://placehold.co/500x500/1e293b/10b981.png?text=Album+v3+Artwork",
+                title: "Ndakulumba",
+                volume: "Volume 3",
+                img: "v3.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Awake-1", duration: "3:30", sirc: "Phillip-Lisomona_Awake1.mp3" },
                     { title: "Phillip-Lisomona-Awake-2", duration: "4:05", sirc: "Phillip-Lisomona_Awake2.mp3" },
@@ -294,9 +307,9 @@
             },
             {
                 id: "v4",
-                title: "Inspirational Hymns",
-                volume: "Volume v4",
-                img: "https://placehold.co/500x500/1e293b/3b82f6.png?text=Album+v4+Artwork",
+                title: "Nkukuli Nkomuzulilwa",
+                volume: "Volume 4",
+                img: "v4.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Hymn-1", duration: "3:50", sirc: "Phillip-Lisomona_Hymn1.mp3" },
                     { title: "Phillip-Lisomona-Hymn-2", duration: "4:15", sirc: "Phillip-Lisomona_Hymn2.mp3" },
@@ -312,9 +325,9 @@
             },
             {
                 id: "v5",
-                title: "Gospel Anthems",
-                volume: "Volume v5",
-                img: "https://placehold.co/500x500/1e293b/8b5cf6.png?text=Album+v5+Artwork",
+                title: "Ifisabo",
+                volume: "Volume 5",
+                img: "v5.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Anthem-1", duration: "4:02", sirc: "Phillip-Lisomona_Anthem1.mp3" },
                     { title: "Phillip-Lisomona-Anthem-2", duration: "3:45", sirc: "Phillip-Lisomona_Anthem2.mp3" },
@@ -330,9 +343,9 @@
             },
             {
                 id: "v6",
-                title: "Restoration Tour",
-                volume: "Volume v6",
-                img: "https://placehold.co/500x500/1e293b/ec4899.png?text=Album+v6+Artwork",
+                title: "Praises to the Lord",
+                volume: "Volume 6",
+                img: "v6.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Restore-1", duration: "3:48", sirc: "Phillip-Lisomona_Restore1.mp3" },
                     { title: "Phillip-Lisomona-Restore-2", duration: "4:12", sirc: "Phillip-Lisomona_Restore2.mp3" },
@@ -348,9 +361,9 @@
             },
             {
                 id: "v7",
-                title: "Eternal Praise",
-                volume: "Volume v7",
-                img: "https://placehold.co/500x500/1e293b/06b6d4.png?text=Album+v7+Artwork",
+                title: "Nkamuzhibe",
+                volume: "Volume 7",
+                img: "7.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Eternal-1", duration: "4:00", sirc: "Phillip-Lisomona_Eternal1.mp3" },
                     { title: "Phillip-Lisomona-Eternal-2", duration: "3:45", sirc: "Phillip-Lisomona_Eternal2.mp3" },
@@ -403,34 +416,32 @@
                 return `
                 <div id="album-${album.id}" class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all flex flex-col justify-between sm:col-span-2">
                     <div>
-                        <!-- Album Header Banner: Click Artwork to toggle 10 tracks -->
-                        <div class="relative overflow-hidden aspect-[21/9] bg-slate-950 group cursor-pointer" onclick="toggleAlbumTracks('${album.id}')">
-                            <!-- 500x500 PNG Artwork tag -->
-                            <img src="${album.img}" alt="${album.title}" width="500" height="500" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
-                            
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5">
-                                <div class="flex items-center justify-between flex-wrap gap-3">
-                                    <div>
-                                        <span class="bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-wider">${album.volume}</span>
-                                        <h3 class="text-lg sm:text-xl font-black text-white mt-1 group-hover:text-red-400 transition-colors">${album.title}</h3>
-                                        <p class="text-xs text-slate-300 font-medium">Phillip Lisomona • 10 Tracks (Click Artwork to view tracks)</p>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <button onclick="event.stopPropagation(); window.open('${selarLink}', '_blank')" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-1.5">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                            <span>Buy this Album</span>
-                                        </button>
-                                        <div class="bg-red-600/90 hover:bg-red-600 text-white px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-lg shadow-red-600/40 flex items-center space-x-1">
-                                            <span>${isExpanded ? 'Hide Tracks' : 'View Tracks'}</span>
-                                            <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'}"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                        <!-- Album Header Banner: Natural image display with object-contain to show the full picture as it is -->
+                        <div class="relative w-full bg-slate-950 flex items-center justify-center group cursor-pointer overflow-hidden p-2" onclick="toggleAlbumTracks('${album.id}')">
+                            <img src="${album.img}" alt="${album.title}" width="500" height="500" class="max-h-96 w-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500 shadow-xl" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
+                        </div>
+
+                        <!-- Album Info & Action Bar -->
+                        <div class="p-5 bg-gradient-to-t from-slate-900 via-slate-900/95 to-slate-900/80 border-t border-slate-800/60 flex items-center justify-between flex-wrap gap-3">
+                            <div>
+                                <span class="bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-wider">${album.volume}</span>
+                                <h3 class="text-lg sm:text-xl font-black text-white mt-1">${album.title}</h3>
+                                <p class="text-xs text-slate-300 font-medium">Phillip Lisomona • 10 Tracks (Click to view tracklist)</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="event.stopPropagation(); window.open('${selarLink}', '_blank')" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <span>Buy this Album</span>
+                                </button>
+                                <button onclick="toggleAlbumTracks('${album.id}')" class="bg-red-600/90 hover:bg-red-600 text-white px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-lg shadow-red-600/40 flex items-center space-x-1">
+                                    <span>${isExpanded ? 'Hide Tracks' : 'View Tracks'}</span>
+                                    <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'}"></i>
+                                </button>
                             </div>
                         </div>
 
                         <!-- Expandable Tracks List Container with 'sirc' audio tags -->
-                        <div id="tracks-container-${album.id}" class="${isExpanded ? 'block' : 'hidden'} p-4 space-y-2 bg-slate-950/80 border-t border-slate-800">
+                        <div id="tracks-container-${album.id}" class="${isExpanded ? 'block' : 'hidden'} p-4 space-y-2 bg-slate-950/90 border-t border-slate-800">
                             <h4 class="text-[11px] font-bold uppercase tracking-wider text-red-500 mb-2">Album Tracklist (${album.volume}) - Click Stream to Play/Pause</h4>
                             <div class="space-y-1.5">
                                 ${album.tracks.map((track, idx) => {
