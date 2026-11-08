@@ -34,9 +34,6 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
-        img {
-            transition: opacity 0.2s ease-in-out, transform 0.3s ease-in-out;
-        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white pb-28">
@@ -85,7 +82,7 @@
             <span class="bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-1 rounded tracking-wider animate-pulse shrink-0">NEW ALBUMS V1 - V7</span>
             <div class="overflow-hidden whitespace-nowrap">
                 <p class="text-xs sm:text-sm font-medium text-red-100 tracking-wide inline-block animate-[marquee_20s_linear_infinite]">
-                    🔥 Stream Volumes v1 to v7 with instant toggle play/pause streaming & lightning-fast JPG artwork loading. Click Album Artwork to reveal tracklists! 🎵
+                    🔥 Stream Volumes v1 to v7 with toggle play/pause streaming. Click Album Artwork to reveal tracklists! 🎵
                 </p>
             </div>
         </div>
@@ -146,7 +143,7 @@
 
                 <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-red-950 rounded-2xl border border-slate-800 p-5 shadow-xl text-center">
                     <div class="w-20 h-20 mx-auto rounded-full p-1 bg-gradient-to-r from-red-600 to-amber-500 shadow-lg mb-3">
-                        <img src="about.jpg" alt="Phillip Lisomona" loading="eager" fetchpriority="high" class="w-full h-full object-cover rounded-full" onerror="this.src='about.png'">
+                        <img src="about.png" alt="Phillip Lisomona" class="w-full h-full object-cover rounded-full">
                     </div>
                     <h4 class="font-bold text-base text-white">Phillip Lisomona</h4>
                     <p class="text-xs text-red-400 font-medium mb-3">Gospel Artist & Producer</p>
@@ -163,7 +160,7 @@
     <div id="audioPlayerBar" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 px-4 py-3 shadow-2xl transition-all duration-300 translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center space-x-3 w-full sm:w-1/4">
-                <img id="playerThumb" src="about.jpg" alt="Cover" class="w-12 h-12 rounded-xl object-cover shadow border border-slate-800" onerror="this.src='about.png'">
+                <img id="playerThumb" src="about.png" alt="Cover" class="w-12 h-12 rounded-xl object-cover shadow border border-slate-800">
                 <div class="overflow-hidden">
                     <h4 id="playerTitle" class="text-xs sm:text-sm font-bold text-white truncate">Select a track to play</h4>
                     <p id="playerArtist" class="text-[11px] text-red-400 truncate font-medium">Phillip Lisomona</p>
@@ -258,7 +255,7 @@
                 id: "v1",
                 title: "Hena Ndileelela",
                 volume: "Volume 1",
-                img: "v1.jpg",
+                img: "v1.png",
                 tracks: [
                     { title: "Phillip-Lisomona-Adam", duration: "3:45", sirc: "Phillip-Lisomona-Adam.mp3" },
                     { title: "Phillip-Lisomona-Atunyamuke", duration: "4:12", sirc: "Phillip-Lisomona_Atunyamuke.mp3" },
@@ -276,7 +273,7 @@
                 id: "v2",
                 title: "Katulyaambilila",
                 volume: "Volume 2",
-                img: "v2.jpg",
+                img: "v2.png",
                 tracks: [
                     { title: "Phillip-Lisomona-Worship-One", duration: "4:00", sirc: "Phillip-Lisomona_Worship1.mp3" },
                     { title: "Phillip-Lisomona-Worship-Two", duration: "3:52", sirc: "Phillip-Lisomona_Worship2.mp3" },
@@ -294,7 +291,7 @@
                 id: "v3",
                 title: "Ndakulumba",
                 volume: "Volume 3",
-                img: "v3.jpg",
+                img: "v3.png",
                 tracks: [
                     { title: "Phillip-Lisomona-Awake-1", duration: "3:30", sirc: "Phillip-Lisomona_Awake1.mp3" },
                     { title: "Phillip-Lisomona-Awake-2", duration: "4:05", sirc: "Phillip-Lisomona_Awake2.mp3" },
@@ -312,7 +309,7 @@
                 id: "v4",
                 title: "Nkukuli Nkomuzulilwa",
                 volume: "Volume 4",
-                img: "v4.jpg",
+                img: "v4.png",
                 tracks: [
                     { title: "Phillip-Lisomona-Hymn-1", duration: "3:50", sirc: "Phillip-Lisomona_Hymn1.mp3" },
                     { title: "Phillip-Lisomona-Hymn-2", duration: "4:15", sirc: "Phillip-Lisomona_Hymn2.mp3" },
@@ -330,7 +327,7 @@
                 id: "v5",
                 title: "Ifisabo",
                 volume: "Volume 5",
-                img: "v5.jpg",
+                img: "v5.png",
                 tracks: [
                     { title: "Phillip-Lisomona-Anthem-1", duration: "4:02", sirc: "Phillip-Lisomona_Anthem1.mp3" },
                     { title: "Phillip-Lisomona-Anthem-2", duration: "3:45", sirc: "Phillip-Lisomona_Anthem2.mp3" },
@@ -366,7 +363,7 @@
                 id: "v7",
                 title: "Nkamuzhibe",
                 volume: "Volume 7",
-                img: "v7.jpg",
+                img: "7.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Eternal-1", duration: "4:00", sirc: "Phillip-Lisomona_Eternal1.mp3" },
                     { title: "Phillip-Lisomona-Eternal-2", duration: "3:45", sirc: "Phillip-Lisomona_Eternal2.mp3" },
@@ -390,17 +387,7 @@
         const audioElement = new Audio();
         let expandedAlbums = {};
 
-        // Preload images immediately for instant rendering
-        function preloadImages() {
-            const imagesToPreload = ['about.jpg', ...albumsData.map(a => a.img)];
-            imagesToPreload.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-        }
-
         window.onload = function() {
-            preloadImages();
             activePlaylist = albumsData.flatMap(album => album.tracks.map(t => ({
                 ...t,
                 artist: "Phillip Lisomona",
@@ -423,17 +410,15 @@
                 return;
             }
 
-            grid.innerHTML = list.map((album, index) => {
+            grid.innerHTML = list.map((album) => {
                 const isExpanded = expandedAlbums[album.id] || false;
-                const loadingAttr = index < 2 ? 'eager' : 'lazy';
-                const fetchPriorityAttr = index < 2 ? 'high' : 'auto';
                 
                 return `
                 <div id="album-${album.id}" class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all flex flex-col justify-between sm:col-span-2">
                     <div>
-                        <!-- Album Header Banner: Natural image display with object-contain and eager loading for instant appearance -->
+                        <!-- Album Header Banner: Natural image display with object-contain to show the full picture as it is -->
                         <div class="relative w-full bg-slate-950 flex items-center justify-center group cursor-pointer overflow-hidden p-2" onclick="toggleAlbumTracks('${album.id}')">
-                            <img src="${album.img}" alt="${album.title}" width="500" height="500" loading="${loadingAttr}" fetchpriority="${fetchPriorityAttr}" class="max-h-96 w-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-300 shadow-xl" onload="this.style.opacity='1'" style="opacity:0; transition: opacity 0.2s ease-in;" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
+                            <img src="${album.img}" alt="${album.title}" width="500" height="500" class="max-h-96 w-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500 shadow-xl" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
                         </div>
 
                         <!-- Album Info & Action Bar -->
