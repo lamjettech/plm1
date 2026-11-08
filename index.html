@@ -34,6 +34,9 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+        img {
+            transition: opacity 0.2s ease-in-out, transform 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-500 selection:text-white pb-28">
@@ -82,7 +85,7 @@
             <span class="bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-1 rounded tracking-wider animate-pulse shrink-0">NEW ALBUMS V1 - V7</span>
             <div class="overflow-hidden whitespace-nowrap">
                 <p class="text-xs sm:text-sm font-medium text-red-100 tracking-wide inline-block animate-[marquee_20s_linear_infinite]">
-                    🔥 Stream Volumes v1 to v7 with toggle play/pause streaming. Click Album Artwork to reveal tracklists! 🎵
+                    🔥 Stream Volumes v1 to v7 with instant toggle play/pause streaming & lightning-fast JPG artwork loading. Click Album Artwork to reveal tracklists! 🎵
                 </p>
             </div>
         </div>
@@ -143,7 +146,7 @@
 
                 <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-red-950 rounded-2xl border border-slate-800 p-5 shadow-xl text-center">
                     <div class="w-20 h-20 mx-auto rounded-full p-1 bg-gradient-to-r from-red-600 to-amber-500 shadow-lg mb-3">
-                        <img src="about.png" alt="Phillip Lisomona" class="w-full h-full object-cover rounded-full">
+                        <img src="about.jpg" alt="Phillip Lisomona" loading="eager" fetchpriority="high" class="w-full h-full object-cover rounded-full" onerror="this.src='about.png'">
                     </div>
                     <h4 class="font-bold text-base text-white">Phillip Lisomona</h4>
                     <p class="text-xs text-red-400 font-medium mb-3">Gospel Artist & Producer</p>
@@ -160,7 +163,7 @@
     <div id="audioPlayerBar" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 px-4 py-3 shadow-2xl transition-all duration-300 translate-y-full">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center space-x-3 w-full sm:w-1/4">
-                <img id="playerThumb" src="about.png" alt="Cover" class="w-12 h-12 rounded-xl object-cover shadow border border-slate-800">
+                <img id="playerThumb" src="about.jpg" alt="Cover" class="w-12 h-12 rounded-xl object-cover shadow border border-slate-800" onerror="this.src='about.png'">
                 <div class="overflow-hidden">
                     <h4 id="playerTitle" class="text-xs sm:text-sm font-bold text-white truncate">Select a track to play</h4>
                     <p id="playerArtist" class="text-[11px] text-red-400 truncate font-medium">Phillip Lisomona</p>
@@ -363,7 +366,7 @@
                 id: "v7",
                 title: "Nkamuzhibe",
                 volume: "Volume 7",
-                img: "7.jpg",
+                img: "v7.jpg",
                 tracks: [
                     { title: "Phillip-Lisomona-Eternal-1", duration: "4:00", sirc: "Phillip-Lisomona_Eternal1.mp3" },
                     { title: "Phillip-Lisomona-Eternal-2", duration: "3:45", sirc: "Phillip-Lisomona_Eternal2.mp3" },
@@ -387,7 +390,17 @@
         const audioElement = new Audio();
         let expandedAlbums = {};
 
+        // Preload images immediately for instant rendering
+        function preloadImages() {
+            const imagesToPreload = ['about.jpg', ...albumsData.map(a => a.img)];
+            imagesToPreload.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+
         window.onload = function() {
+            preloadImages();
             activePlaylist = albumsData.flatMap(album => album.tracks.map(t => ({
                 ...t,
                 artist: "Phillip Lisomona",
@@ -410,15 +423,17 @@
                 return;
             }
 
-            grid.innerHTML = list.map((album) => {
+            grid.innerHTML = list.map((album, index) => {
                 const isExpanded = expandedAlbums[album.id] || false;
+                const loadingAttr = index < 2 ? 'eager' : 'lazy';
+                const fetchPriorityAttr = index < 2 ? 'high' : 'auto';
                 
                 return `
                 <div id="album-${album.id}" class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all flex flex-col justify-between sm:col-span-2">
                     <div>
-                        <!-- Album Header Banner: Natural image display with object-contain to show the full picture as it is -->
+                        <!-- Album Header Banner: Natural image display with object-contain and eager loading for instant appearance -->
                         <div class="relative w-full bg-slate-950 flex items-center justify-center group cursor-pointer overflow-hidden p-2" onclick="toggleAlbumTracks('${album.id}')">
-                            <img src="${album.img}" alt="${album.title}" width="500" height="500" class="max-h-96 w-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500 shadow-xl" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
+                            <img src="${album.img}" alt="${album.title}" width="500" height="500" loading="${loadingAttr}" fetchpriority="${fetchPriorityAttr}" class="max-h-96 w-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-300 shadow-xl" onload="this.style.opacity='1'" style="opacity:0; transition: opacity 0.2s ease-in;" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
                         </div>
 
                         <!-- Album Info & Action Bar -->
