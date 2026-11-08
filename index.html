@@ -345,16 +345,17 @@
                 volume: "Volume 6",
                 img: "v6.jpg",
                 tracks: [
-                    { title: "Phillip-Lisomona-Restore-1", duration: "3:48", sirc: "Phillip-Lisomona_Restore1.mp3" },
-                    { title: "Phillip-Lisomona-Restore-2", duration: "4:12", sirc: "Phillip-Lisomona_Restore2.mp3" },
-                    { title: "Phillip-Lisomona-Kuli-Lesa", duration: "3:33", sirc: "Phillip-Lisomona_KuliLesa.mp3" },
-                    { title: "Phillip-Lisomona-Imiku-Yesu", duration: "4:01", sirc: "Phillip-Lisomona_ImikuYesu.mp3" },
-                    { title: "Phillip-Lisomona-Mutende", duration: "3:50", sirc: "Phillip-Lisomona_Mutende.mp3" },
-                    { title: "Phillip-Lisomona-Tuleimbila", duration: "3:25", sirc: "Phillip-Lisomona_Tuleimbila.mp3" },
-                    { title: "Phillip-Lisomona-Nshailile", duration: "4:19", sirc: "Phillip-Lisomona_Nshailile.mp3" },
-                    { title: "Phillip-Lisomona-Bupokelele", duration: "3:55", sirc: "Phillip-Lisomona_Bupokelele.mp3" },
-                    { title: "Phillip-Lisomona-Luse-Lwandi", duration: "4:08", sirc: "Phillip-Lisomona_LuseLwandi.mp3" },
-                    { title: "Phillip-Lisomona-Amen-Asubila", duration: "4:30", sirc: "Phillip-Lisomona_AmenAsubila.mp3" }
+                    { title: "Jesu Ulandikwabilila", duration: "4:00", sirc: "Jesu-Ulandikwabilila.mp3" },
+                    { title: "Praises to the Lord", duration: "4:00", sirc: "Praises-to-the-Lord.mp3" },
+                    { title: "Lesa wafisungusho", duration: "4:00", sirc: "Lesa-wafisungusho.mp3" },
+                    { title: "Ndime Ni", duration: "4:00", sirc: "Ndime-Ni.mp3" },
+                    { title: "Ndiyanda Julu", duration: "4:00", sirc: "Ndiyanda-Julu.mp3" },
+                    { title: "Tuyakwiimba", duration: "4:00", sirc: "Tuyakwiimba.mp3" },
+                    { title: "Wacaala Tweende", duration: "4:00", sirc: "Wacaala-Tweende.mp3" },
+                    { title: "Mukazhiba", duration: "4:00", sirc: "Mukazhiba.mp3" },
+                    { title: "Mutulile", duration: "4:00", sirc: "Mutulile.mp3" },
+                    { title: "Ikupaila Kwalike", duration: "4:00", sirc: "Ikupaila-Kwalike.mp3" },
+                    { title: "Kobapa Zyoolwe", duration: "4:00", sirc: "Kobapa-Zyoolwe.mp3" }
                 ]
             },
             {
@@ -363,16 +364,17 @@
                 volume: "Volume 7",
                 img: "7.jpg",
                 tracks: [
-                    { title: "Phillip-Lisomona-Eternal-1", duration: "4:00", sirc: "Phillip-Lisomona_Eternal1.mp3" },
-                    { title: "Phillip-Lisomona-Eternal-2", duration: "3:45", sirc: "Phillip-Lisomona_Eternal2.mp3" },
-                    { title: "Phillip-Lisomona-Lesa-Mubambe", duration: "4:15", sirc: "Phillip-Lisomona_LesaMubambe.mp3" },
-                    { title: "Phillip-Lisomona-Tupashile", duration: "3:30", sirc: "Phillip-Lisomona_Tupashile.mp3" },
-                    { title: "Phillip-Lisomona-Mbuyu-Wesu", duration: "3:55", sirc: "Phillip-Lisomona_MbuyuWesu.mp3" },
-                    { title: "Phillip-Lisomona-Balumbanya", duration: "4:10", sirc: "Phillip-Lisomona_Balumbanya.mp3" },
-                    { title: "Phillip-Lisomona-Kuleka", duration: "3:42", sirc: "Phillip-Lisomona_Kuleka.mp3" },
-                    { title: "Phillip-Lisomona-Nangu-Nkwabe", duration: "4:20", sirc: "Phillip-Lisomona_NanguNkwabe.mp3" },
-                    { title: "Phillip-Lisomona-Chibote", duration: "3:50", sirc: "Phillip-Lisomona_Chibote.mp3" },
-                    { title: "Phillip-Lisomona-Final-Glory", duration: "5:10", sirc: "Phillip-Lisomona_FinalGlory.mp3" }
+                    { title: "Nkamuzhibe", duration: "4:00", sirc: "Nkamuzhibe.mp3" },
+                    { title: "Mbuli Jesu", duration: "4:00", sirc: "Mbuli-Jesu.mp3" },
+                    { title: "Kuswana Mulonga", duration: "4:00", sirc: "Kuswana-Mulonga.mp3" },
+                    { title: "Konse Akantwala", duration: "4:00", sirc: "Konse-Akantwala.mp3" },
+                    { title: "Konditola", duration: "4:00", sirc: "Konditola.mp3" },
+                    { title: "Ndivwumbe", duration: "4:00", sirc: "Ndivwumbe.mp3" },
+                    { title: "Bakaleta Zipego", duration: "4:00", sirc: "Bakaleta-Zipego.mp3" },
+                    { title: "Munyika Itamani", duration: "4:00", sirc: "Munyika-Itamani.mp3" },
+                    { title: "Tulachita Buti", duration: "4:00", sirc: "Tulachita-Buti.mp3" },
+                    { title: "Zipaso", duration: "4:00", sirc: "Zipaso.mp3" },
+                    { title: "Higher Ground", duration: "4:00", sirc: "Higher-Ground.mp3" }
                 ]
             }
         ];
@@ -383,7 +385,7 @@
         let isPlaying = false;
         let currentPlayingUrl = null;
         const audioElement = new Audio();
-        let expandedAlbums = { v1: true, v3: true, v4: true, v5: true }; // Keep Volume 1 expanded for easy viewing
+        let expandedAlbums = { v1: true, v3: true, v4: true, v5: true, v6: true, v7: true }; // Keep Volume 1 expanded for easy viewing
 
         window.onload = function() {
             activePlaylist = albumsData.flatMap(album => album.tracks.map(t => ({
