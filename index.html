@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phillip Lisomona - Official Music & Download Portal</title>
+    <title>Phillip Lisomona - Official Music Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -55,6 +55,7 @@
                 <nav class="hidden lg:flex items-center space-x-8 font-semibold text-sm tracking-wide">
                     <a href="#home" onclick="filterCategory('All')" class="text-red-500 hover:text-red-400 transition-colors nav-link active" data-cat="All">HOME</a>
                     <a href="#albums" onclick="filterCategory('Album')" class="text-slate-300 hover:text-red-400 transition-colors nav-link" data-cat="Album">ALBUMS (v1-v7)</a>
+                    <a href="#contact-dashboard" class="text-slate-300 hover:text-red-400 transition-colors">CONTACT DASHBOARD</a>
                     <a href="#contact" onclick="openContactModal()" class="text-slate-300 hover:text-red-400 transition-colors">CONTACT</a>
                 </nav>
 
@@ -72,6 +73,7 @@
         <div id="mobileMenu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
             <a href="#home" onclick="filterCategory('All'); toggleMobileMenu();" class="block text-red-500 font-semibold py-1">HOME</a>
             <a href="#albums" onclick="filterCategory('Album'); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">ALBUMS (v1-v7)</a>
+            <a href="#contact-dashboard" onclick="toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">CONTACT DASHBOARD</a>
             <a href="#contact" onclick="openContactModal(); toggleMobileMenu();" class="block text-slate-300 hover:text-red-400 font-semibold py-1">CONTACT</a>
         </div>
     </header>
@@ -89,11 +91,46 @@
     </div>
 
     <!-- MAIN CONTENT LAYOUT -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+    <main id="home" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-8">
+        
+        <!-- HERO INTRODUCTION SECTION -->
+        <section class="bg-gradient-to-r from-slate-900 via-slate-900/90 to-red-950/40 rounded-3xl border border-slate-800 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl p-1 bg-gradient-to-tr from-red-600 to-amber-500 shadow-xl shrink-0">
+                    <img src="about.png" alt="Phillip Lisomona" class="w-full h-full object-cover rounded-xl">
+                </div>
+                <div class="space-y-4 text-center md:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-red-600/20 border border-red-500/30 px-3 py-1 rounded-full text-red-400 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                        <span>Official Artist Profile</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight">Phillip Lisomona</h1>
+                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
+                        Phillip Lisomona is a renowned gospel musician of the Seventh Day Adventist Church based in Lusaka, Zambia | a music producer and an Entrepreneur.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2 text-xs text-slate-300 font-semibold">
+                        <a href="tel:+260971132818" class="flex items-center space-x-2 bg-slate-950/80 border border-slate-700 hover:border-red-500 px-4 py-2 rounded-xl transition-colors">
+                            <i class="fa-solid fa-phone text-red-500"></i>
+                            <span>+260 971 132 818</span>
+                        </a>
+                        <a href="mailto:philliplisomonamusic@gmail.com" class="flex items-center space-x-2 bg-slate-950/80 border border-slate-700 hover:border-red-500 px-4 py-2 rounded-xl transition-colors">
+                            <i class="fa-solid fa-envelope text-red-500"></i>
+                            <span>philliplisomonamusic@gmail.com</span>
+                        </a>
+                        <a href="https://www.facebook.com/Philliplisomona" target="_blank" class="flex items-center space-x-2 bg-slate-950/80 border border-slate-700 hover:border-red-500 px-4 py-2 rounded-xl transition-colors">
+                            <i class="fa-brands fa-facebook text-red-500"></i>
+                            <span>Facebook Profile</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             <!-- LEFT 2 COLUMNS: Albums & Tracks Container -->
-            <div class="lg:col-span-2 space-y-6">
+            <div id="albums" class="lg:col-span-2 space-y-6">
                 
                 <!-- Category Filter Pills Bar -->
                 <div class="flex items-center justify-between flex-wrap gap-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800 shadow-md">
@@ -154,6 +191,60 @@
                 </div>
             </aside>
         </div>
+
+        <!-- CONTACT DASHBOARD SECTION -->
+        <section id="contact-dashboard" class="bg-gradient-to-br from-slate-900 via-slate-900 to-red-950/40 rounded-3xl border border-slate-800 p-6 sm:p-10 shadow-2xl">
+            <div class="text-center max-w-2xl mx-auto mb-8 space-y-2">
+                <span class="bg-red-600/20 border border-red-500/30 text-red-400 text-xs font-extrabold uppercase px-3 py-1 rounded-full tracking-wider">Get in Touch</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">Contact Dashboard</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Reach out for bookings, gospel music collaborations, production inquiries, and ministry events.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Phone Card -->
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 text-center space-y-4 hover:border-red-500/50 transition-colors shadow-lg">
+                    <div class="w-12 h-12 rounded-2xl bg-red-600/20 text-red-500 flex items-center justify-center mx-auto text-xl shadow-inner">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Phone Number</h4>
+                        <p class="text-base font-bold text-white mt-1">+260 971 132 818</p>
+                    </div>
+                    <a href="tel:+260971132818" class="inline-block w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-bold uppercase transition-colors shadow-lg shadow-red-600/30">
+                        Call Now
+                    </a>
+                </div>
+
+                <!-- Email Card -->
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 text-center space-y-4 hover:border-red-500/50 transition-colors shadow-lg">
+                    <div class="w-12 h-12 rounded-2xl bg-red-600/20 text-red-500 flex items-center justify-center mx-auto text-xl shadow-inner">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Email Address</h4>
+                        <p class="text-sm font-bold text-white mt-1 truncate">philliplisomonamusic@gmail.com</p>
+                    </div>
+                    <a href="mailto:philliplisomonamusic@gmail.com" class="inline-block w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-bold uppercase transition-colors shadow-lg shadow-red-600/30">
+                        Send Email
+                    </a>
+                </div>
+
+                <!-- Facebook Card -->
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 text-center space-y-4 hover:border-red-500/50 transition-colors shadow-lg">
+                    <div class="w-12 h-12 rounded-2xl bg-red-600/20 text-red-500 flex items-center justify-center mx-auto text-xl shadow-inner">
+                        <i class="fa-brands fa-facebook"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Facebook Page</h4>
+                        <p class="text-sm font-bold text-white mt-1 truncate">Philliplisomona</p>
+                    </div>
+                    <a href="https://www.facebook.com/Philliplisomona" target="_blank" class="inline-block w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-bold uppercase transition-colors shadow-lg shadow-red-600/30">
+                        Visit Facebook
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- CUSTOM HTML5 BOTTOM AUDIO PLAYER BAR -->
@@ -239,10 +330,9 @@
         <div class="max-w-7xl mx-auto px-4 space-y-4">
             <p class="font-semibold text-slate-400">© 2026 Phillip Lisomona Music. All Rights Reserved.</p>
             <div class="flex justify-center space-x-6 text-slate-400 text-sm">
-                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
-                <a href="#" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/Philliplisomona" target="_blank" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                <a href="mailto:philliplisomonamusic@gmail.com" class="hover:text-red-500 transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                <a href="tel:+260971132818" class="hover:text-red-500 transition-colors"><i class="fa-solid fa-phone"></i></a>
             </div>
             <p class="text-[10px] text-slate-600">Designed @LISOTECH INNOVATIONS.</p>
         </div>
@@ -255,7 +345,7 @@
                 id: "v1",
                 title: "Hena Ndileelela",
                 volume: "Volume 1",
-                img: "v1.png",
+                img: "v1.jpg",
                 tracks: [
                     { title: "Hena Ndileelela ft Ashers Masempela & Orden Hamooya", duration: "3:45", sirc: "Hena-Ndileelela-ft-Ashers-Masempela-&-Orden-Hamooya.mp3" },
                     { title: "Tuyakuunka Phillip Lisomona", duration: "4:12", sirc: "Tuyakuunka-Phillip-Lisomona.mp3" },
@@ -271,7 +361,7 @@
                 id: "v2",
                 title: "Katulyaambilila",
                 volume: "Volume 2",
-                img: "v2.png",
+                img: "v2.jpg",
                 tracks: [
                     { title: "Katulyaambilila", duration: "4:00", sirc: "Katulyaambilila.mp3" },
                     { title: "Ndeelele kweenda mixdown", duration: "4:00", sirc: "Ndeelele-kweenda-mixdown.mp3" },
@@ -288,7 +378,7 @@
                 id: "v3",
                 title: "Eyi Nyika",
                 volume: "Volume 3",
-                img: "v3.png",
+                img: "v3.jpg",
                 tracks: [
                     { title: "Ndakulumba", duration: "4:00", sirc: "Ndakulumba.mp3" },
                     { title: "Phillip Lisomona ft Davies Mulaya Righteous Are You Lord", duration: "4:00", sirc: "Phillip-Lisomona-ft-Davies-Mulaya-Righteous-Are-You-Lord.mp3" },
@@ -306,7 +396,7 @@
                 id: "v4",
                 title: "Nkukuli Nkomuzulilwa",
                 volume: "Volume 4",
-                img: "v4.png",
+                img: "v4.jpg",
                 tracks: [
                     { title: "Nyika Njotukede", duration: "4:00", sirc: "Nyika-Njotukede.mp3" },
                     { title: "Zioni Munzi", duration: "4:00", sirc: "Zioni-Munzi.mp3" },
@@ -324,7 +414,7 @@
                 id: "v5",
                 title: "Ifisabo",
                 volume: "Volume 5",
-                img: "v5.png",
+                img: "v5.jpg",
                 tracks: [
                     { title: "Phillip Lisomona Tuli fimuti", duration: "4:00", sirc: "Phillip-Lisomona-Tuli-fimuti.mp3" },
                     { title: "Phillip Lisomona Atunyamuke", duration: "4:00", sirc: "Phillip-Lisomona-Atunyamuke.mp3" },
@@ -385,7 +475,7 @@
         let isPlaying = false;
         let currentPlayingUrl = null;
         const audioElement = new Audio();
-        let expandedAlbums = { v1: true, v3: true, v4: true, v5: true, v6: true, v7: true }; // Keep Volume 1 expanded for easy viewing
+        let expandedAlbums = { v1: true, v3: true, v4: true, v5: true, v6: true, v7: true };
 
         window.onload = function() {
             activePlaylist = albumsData.flatMap(album => album.tracks.map(t => ({
@@ -416,12 +506,10 @@
                 return `
                 <div id="album-${album.id}" class="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-lg hover:border-red-500/50 transition-all flex flex-col justify-between sm:col-span-2">
                     <div>
-                        <!-- Album Header Banner: Natural image display with object-contain to show the full picture as it is -->
                         <div class="relative w-full bg-slate-950 flex items-center justify-center group cursor-pointer overflow-hidden p-2" onclick="toggleAlbumTracks('${album.id}')">
                             <img src="${album.img}" alt="${album.title}" width="500" height="500" class="max-h-96 w-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500 shadow-xl" onerror="this.src='https://placehold.co/500x500/1e293b/ef4444.png?text=Album'">
                         </div>
 
-                        <!-- Album Info & Action Bar -->
                         <div class="p-5 bg-gradient-to-t from-slate-900 via-slate-900/95 to-slate-900/80 border-t border-slate-800/60 flex items-center justify-between flex-wrap gap-3">
                             <div>
                                 <span class="bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-wider">${album.volume}</span>
@@ -440,7 +528,6 @@
                             </div>
                         </div>
 
-                        <!-- Expandable Tracks List Container with 'sirc' audio tags -->
                         <div id="tracks-container-${album.id}" class="${isExpanded ? 'block' : 'hidden'} p-4 space-y-2 bg-slate-950/90 border-t border-slate-800">
                             <h4 class="text-[11px] font-bold uppercase tracking-wider text-red-500 mb-2">Album Tracklist (${album.volume}) - Click Stream to Play/Pause</h4>
                             <div class="space-y-1.5">
@@ -451,7 +538,6 @@
                                         <div class="flex items-center space-x-3 overflow-hidden">
                                             <span class="text-xs font-bold text-slate-500 w-5 text-right">#${idx + 1}</span>
                                             <div class="overflow-hidden">
-                                                <!-- Audio source tag referenced as sirc -->
                                                 <h5 class="text-xs font-bold text-slate-200 truncate group-hover:text-red-400 transition-colors" sirc="${track.sirc}">${track.title}</h5>
                                                 <span class="text-[10px] text-slate-400 font-medium">${album.volume} • ${track.duration}</span>
                                             </div>
