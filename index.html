@@ -395,6 +395,32 @@
         </div>
     </div>
 
+    <!-- PURCHASE PREVIEW LIMIT POPUP MODAL -->
+    <div id="previewLimitModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center space-y-5 animate-in fade-in zoom-in duration-200">
+            <button onclick="closePreviewModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark"></i></button>
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500 to-red-600 flex items-center justify-center mx-auto shadow-lg text-white text-2xl">
+                <i class="fa-solid fa-compact-disc"></i>
+            </div>
+            <div class="space-y-2">
+                <span class="bg-amber-500/20 text-amber-400 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider">1-Minute Preview Ended</span>
+                <h3 class="text-xl font-black text-white">Enjoying this Track?</h3>
+                <p id="previewModalTrackName" class="text-xs text-slate-300 font-medium">You have reached the free 1-minute streaming limit. Purchase the full track or the entire album to keep listening without limits!</p>
+            </div>
+            <div class="space-y-3 pt-2">
+                <a href="https://payzaapi.co.ke/pay/78c331a83fdd08c1" target="_blank" onclick="closePreviewModal()" class="w-full py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase transition-all shadow-lg shadow-amber-600/30 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Buy Single Track (Payza)</span>
+                </a>
+                <a href="https://payzaapi.co.ke/pay/82eef11c52f06829" target="_blank" onclick="closePreviewModal()" class="w-full py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs uppercase transition-all shadow-lg shadow-red-600/30 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <span>Buy Whole Album (Payza)</span>
+                </a>
+            </div>
+            <button onclick="closePreviewModal()" class="text-xs text-slate-500 hover:text-slate-300 underline font-medium">Continue Browsing</button>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="bg-black border-t border-slate-900 py-8 text-center text-xs text-slate-500 mt-auto">
         <div class="max-w-7xl mx-auto px-4 space-y-4">
@@ -736,6 +762,7 @@
 
         function loadAndPlayTrack(track) {
             audioElement.src = track.sirc;
+            audioElement.currentTime = 0;
             audioElement.play();
             isPlaying = true;
             currentPlayingUrl = track.sirc;
@@ -745,6 +772,10 @@
             document.getElementById('playerThumb').src = track.thumb;
             document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
             document.getElementById('audioPlayerBar').classList.remove('translate-y-full');
+            
+            // Set track name in preview limit modal
+            document.getElementById('previewModalTrackName').innerText = `You have reached the free 1-minute streaming limit for "${track.title}". Purchase the full track or entire album to enjoy uninterrupted playback!`;
+            
             renderAlbums(albumsData);
         }
 
@@ -805,16 +836,30 @@
 
         function updateProgress() {
             if (audioElement.duration) {
-                const progressPercent = (audioElement.currentTime / audioElement.duration) * 100;
+                // Enforce 1-minute (60 seconds) preview limit
+                if (audioElement.currentTime >= 60) {
+                    audioElement.pause();
+                    audioElement.currentTime = 0;
+                    isPlaying = false;
+                    document.getElementById('playPauseBtn').innerHTML = '<i class="fa-solid fa-play ml-0.5"></i>';
+                    renderAlbums(albumsData);
+                    openPreviewModal();
+                    return;
+                }
+
+                // Show relative progress against 60 seconds preview limit
+                const previewLimit = Math.min(audioElement.duration, 60);
+                const progressPercent = (audioElement.currentTime / previewLimit) * 100;
                 document.getElementById('seekSlider').value = progressPercent;
                 document.getElementById('currentTime').innerText = formatTime(audioElement.currentTime);
-                document.getElementById('durationTime').innerText = formatTime(audioElement.duration);
+                document.getElementById('durationTime').innerText = formatTime(previewLimit) + ' (Limit)';
             }
         }
 
         function seekAudio(val) {
             if (audioElement.duration) {
-                audioElement.currentTime = (val / 100) * audioElement.duration;
+                const previewLimit = Math.min(audioElement.duration, 60);
+                audioElement.currentTime = (val / 100) * previewLimit;
             }
         }
 
@@ -847,6 +892,14 @@
 
         function closeContactModal() {
             document.getElementById('contactModal').classList.add('hidden');
+        }
+
+        function openPreviewModal() {
+            document.getElementById('previewLimitModal').classList.remove('hidden');
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewLimitModal').classList.add('hidden');
         }
 
         function handleContactSubmit(e) {
